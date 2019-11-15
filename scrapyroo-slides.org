@@ -20,6 +20,50 @@ As a someone born after HTTP I imagine that life before services like Deliveroo 
 * TODO xx :noexport:
   ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
   
+* Full text search is a basic human right!  
+
+#+BEGIN_NOTES
+Human brains are good at creativity.
+Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to abuse it.
+#+END_NOTES  
+
+  
+* What can we do?
+  
+- scrape data off Deliveroo website
+- ?????
+- 
+
+#+BEGIN_NOTES
+600 restaurants deliver to my postcode
+50Mb json file (although lots of it is not so useful?)
+#+END_NOTES
+
+* Why Tantivy?
+
+- Why not?
+- initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone.
+
+#+BEGIN_NOTES
+Also need to carry data inside the huge html -- not that great.
+Surprisingly, very few people use something like Dropbox!
+Easier to demonstrate to other people and access from any computer. (TODO eh, although same would be with static html page)
+#+END_NOTES
+
+* Tantivy: good
+
+- well documented, easy to modfy
+- CLI: awesome!
+
+#+BEGIN_NOTES
+
+#+END_NOTES  
+
+* Tantivy: bad
+  
+- no nested document queries (yet)
+- no index 'updates', need to recreate?
+
 * Rust experience
 Virtually none apart from some projecteuler
 
@@ -83,3 +127,67 @@ Easy to mess with jq
 
 ** TODO use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
 ** TODO [2019-11-15 Fri 22:43] hmm nice could just publish my presentation with notes as a post?
+** TODO [#D] very easy to use local dependency (just point to direcory) when I wanted to hack tantivy :rust:scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-10-13 Sun 23:30]
+   :END:
+
+** STRT [#B] notes and log                                        :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-10 Sun 16:17]
+   :END:
+ :LOGBOOK:
+ - State "STRT"       from              [2019-11-10 Sun 20:17]
+ :END:
+
+ Weird, snippets return single word highlights even for phrase searches: e.g. "duck soup"
+
+ interesting feature could be breaking down query (e.g. "Duck Soup" OR "Duck Salad" but maybe it's overkill
+*** [2019-11-10 Sun 20:17] mm, first attempt was just 
+ TODO perhaps split by endlines?
+ maybe what I want it hierarchical documents (or what's it called??)
+*** [2019-11-10 Sun 22:06] right, apparently default stemming in tantivy is en_ already?
+**** [2019-11-10 Sun 22:06] could add to caveats or something?
+*** [2019-11-10 Sun 22:48] very nice thing about tantivy is that you can have a fully functional (perhaps even production grade!) search backend in a matter of minutes
+ with a simple python script or even some jq 
+ easy to debug via httpie/whatever?
+*** TODO [2019-11-10 Sun 23:06] would be also nice to add a simple react search thing for easy kickoff?
+*** TODO [2019-11-10 Sun 23:02] handle that fish AND salad -"fish cake"
+*** TODO [2019-11-10 Sun 23:13] example: fish AND salad -- demonstrate k
+*** TODO [2019-11-10 Sun 23:17] demonstrate how fast it is by doing incremental search in react
+**** [2019-11-10 Sun 23:17] could also use some rust profiling tools for that and quick calculation; compute some latency
+*** TODO [2019-11-10 Sun 23:18] scrape a bigger chunk 
+*** TODO [2019-11-10 Sun 23:21] how to refresh index? I guess need to do it in a single transaction
+*** TODO [2019-11-11 Mon 00:11] my VPS is running bionic and I was getting ./tantivy-cli: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29' not found (required by ./tantivy-cli
+    cross compiling? or musl?
+   
+    whoops?
+    /L/coding/tantivy-cli  ↵ SIGINT(2)  cargo build --target x86_64-unknown-linux-musl
+    Compiling log v0.4.7
+    Compiling matches v0.1.8
+    Compiling cfg-if v0.1.9
+    Compiling autocfg v0.1.5
+    Compiling smallvec v0.6.10
+    Compiling libc v0.2.60
+    Compiling proc-macro2 v0.4.30
+    Compiling version_check v0.1.5
+    error[E0463]: can't find crate for `core`
+   = note: the `x86_64-unknown-linux-musl` target may not be installed
+
+   rustup target add x86_64-unknown-linux-musl && sudo apt install musl-tools
+   and it works!
+  
+ honestly I find it hard appreciate because it's something that was ought to be there in the first place! But rust somehow managed to get it all right
+*** TODO [2019-11-11 Mon 00:32] demonstrace -rice or something?
+*** TODO [2019-11-11 Mon 00:32] I guess ideally you want to have an operator that works like AND but matches against separate menu items. I'm not sure if it's really possible to achieve..
+*** TODO [2019-11-11 Mon 00:33] with wasm, could be fucking awesome if it could suck in jsons once from the backend and then you wouldn't need to do extra queries
+*** TODO [2019-11-11 Mon 00:36] ugh
+ A selection of tandoori chicken, chicken tikka, Iamb tikka, sheek kebab, tandoori king prawn served with green salad12.
+ then baked in the clay oven and wrapped with naan bread. Served with <span class='highlight'>salad</span><sup class='snippet snippet_13 nodebug'>13</sup> and red sauce.	undefined
+ undefined
+ <span class='highlight'>salad</span><sup class='snippet snippet_14 nodebug'>14</sup> and mint sauce.
+
+** TODO would be nice to have a JS query verifier?                :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-11 Mon 23:09]
+   :END:
