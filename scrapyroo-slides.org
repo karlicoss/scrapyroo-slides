@@ -8,7 +8,62 @@
 
 * slide 1 :noexport:
 
-* slide 2
+* Thanks for Deliveroo   
+  
+#+BEGIN_NOTES
+I'm not sure whether they are the first company that came up with the idea but certainly first one I've used and still using for a while. 
+
+As a someone born after HTTP I imagine that life before services like Deliveroo and Uber was basically dark ages.
+
+#+END_NOTES
+
+* TODO xx :noexport:
+  ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
+  
+* Rust experience
+Virtually none apart from some projecteuler
+
+#+BEGIN_NOTES
+#+END_NOTES
+
+* Rust observations
+- cargo makes it *very* easy to change dependency to local
+
+#+BEGIN_NOTES
+There is tantivy, tantivy-cli and tantivy-py.
+
+I was experimenting with exposing this snippet API from tantivy so needed to change dependency 
+
+E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
+#+END_NOTES
+
+- single binary -- very easy to deploy to VPS, which only (huh!) got two cores and wouldn't handle compiling
+
+- musl -- way simpler than I imagined!
+
+- python library -- surprisingly simple integration?  
+
+  
+* Why python scripts?
+
+- interactive
+- easy to mess with data
+
+Happy to be proven otherwise, but would be surprised!
+ 
+#+BEGIN_NOTES
+Basically it's good to keep json data externally in case indexing fails or something.
+
+Easy to mess with jq
+
+#+END_NOTES
+
+* How it works
+- TODO demonstrate json data inside html page
+
+
+* Details
+** TODO how are scores calculated?
 
 * slide 3
 
@@ -27,3 +82,4 @@
   To skip exporting speaker notes, please set variable `org-reveal-ignore-speaker-notes` to `t`.
 
 ** TODO use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
+** TODO [2019-11-15 Fri 22:43] hmm nice could just publish my presentation with notes as a post?
