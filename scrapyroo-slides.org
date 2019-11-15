@@ -1,0 +1,29 @@
+#+TITLE: Scrapyroo
+#+AUTHOR: Dmitrii Gerasimov
+#+EMAIL: karlicoss@gmail.com
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: night
+#+REVEAL_TRANS: linear
+#+REVEAL_EXTRA_CSS: ./noexport.css
+
+* slide 1 :noexport:
+
+* slide 2
+
+* slide 3
+
+  
+* TODO x                                                           :noexport:
+** ok, font sucks a bit?
+
+   
+** TODO speaker notes
+*** Heading 1
+     Some contents.
+  #+BEGIN_NOTES
+    Enter speaker notes here.
+  #+END_NOTES
+
+  To skip exporting speaker notes, please set variable `org-reveal-ignore-speaker-notes` to `t`.
+
+** TODO use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
