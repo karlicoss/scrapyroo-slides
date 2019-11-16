@@ -20,9 +20,27 @@ As a someone born after HTTP I imagine that life before services like Deliveroo 
 * TODO xx :noexport:
   ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
   
+  
+* Motivation
+
+No search  
+
+- best you can do 
+#+BEGIN_NOTES
+ Anyway, then you open all the 15 restaurants that serve fish in different tabs, Ctrl-F tuna and then.
+#+END_NOTES
+
+** Pathetic!
+🙄
+*** TODO use some different meme?
+
+** TODO quick demo maybe? not worth it..
+
 * Full text search is a basic human right!  
 
 #+BEGIN_NOTES
+I asked people and that's apparently what they accept and never even questioned!  
+
 Human brains are good at creativity.
 Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to abuse it.
 #+END_NOTES  
@@ -41,14 +59,21 @@ Not so good at text search -- that's one of things computers are exceptionally g
 
 * Why Tantivy?
 
-- Why not?
-- initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone.
+- initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone
+- G
+- also, why not?
 
 #+BEGIN_NOTES
 Also need to carry data inside the huge html -- not that great.
 Surprisingly, very few people use something like Dropbox!
 Easier to demonstrate to other people and access from any computer. (TODO eh, although same would be with static html page)
 #+END_NOTES
+
+** TODO might be actually good to find out if there are any alternatives :noexport:
+
+* Tantvy: enhancing
+** TODO demonstrate lack of snippets with a checkbox?
+** TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
 
 * Tantivy: good
 
@@ -64,7 +89,8 @@ Easier to demonstrate to other people and access from any computer. (TODO eh, al
 - no nested document queries (yet)
 - no index 'updates', need to recreate?
 
-* Rust experience
+  
+* Past rust experience
 Virtually none apart from some projecteuler
 
 #+BEGIN_NOTES
@@ -86,7 +112,7 @@ E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
 - musl -- way simpler than I imagined!
 
 - python library -- surprisingly simple integration?  
-
+- TODO unicode thing
   
 * Why python scripts?
 
@@ -109,9 +135,22 @@ Easy to mess with jq
 * Details
 ** TODO how are scores calculated?
 
-* slide 3
 
+* Outtakes  
+- you don't have to suffer from inconvenience in your life   
+
+#+BEGIN_NOTES
+You can program. You are literally capable of anything you can think of.
+#+END_NOTES  
+
+* TODO Credits
   
+
+* TODO  reveal help :noexport:
+- https://github.com/yjwen/org-reveal
+- http://jr0cket.co.uk/2013/10/create-cool-slides--Org-mode-Revealjs.html.html
+- http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
+
 * TODO x                                                           :noexport:
 ** ok, font sucks a bit?
 
@@ -191,3 +230,32 @@ Easy to mess with jq
    :PROPERTIES:
    :CREATED:  [2019-11-11 Mon 23:09]
    :END:
+
+** TODO hmm, tell about python bindings and debug method?         :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-14 Thu 18:50]
+   :END:
+*** [2019-11-14 Thu 18:52] I guess demonstrate specific snippets along with imports?
+
+    
+** TODO motivation: I'm not sure how the categories are curated, but I found them not to correspond to the menus :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-14 Thu 19:19]
+   :END:
+
+ e.g. looking for sardines
+ https://deliveroo.co.uk/menu/london/bethnal-green/laxeiro-tapas-bar-ltd
+
+** TODO motivation: mussels AND cheesecake                        :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-14 Thu 19:24]
+   :END:
+** TODO Fish and cheesecake. Weird combo, but I don't flollow made up society rules :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-12 Tue 09:35]
+   :END:
+** TODO It is ok to employ someone to search for you, but not too implement the search yourself? I'd say the former feels wrong :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-12 Tue 09:44]
+   :END:
+
