@@ -6,10 +6,22 @@
 #+REVEAL_EXTRA_CSS: ./noexport.css
 # #+REVEAL_TRANS: linear
 
+# TODO FIXME color R and OO?
+
+
+# TODO FIXME ispell
+
+# Hi, my name is and today I'm gonna tell you about Scrapyroo, which is a tool I implemented to search over Deliveroo menus
+# I'm not employed by Deliveroo by the way! So it's not like I'm just pitching you the feature I implemented on my day job :P
+
 * Past rust experience
 Virtually none apart from some Project Euler
 
 #+BEGIN_NOTES
+I wouldn't necessarily call it a project as I got away with not writing much of new Rust code.
+(which is a good thing! Library I'm going to tell you about does deals with most of hard boring stuff)
+But certainly this is my first proper interaction with the Rust ecosystem.
+
 I am comfortable with many different other programming languages though and have been following Rust news.
 #+END_NOTES
 
@@ -21,6 +33,7 @@ Not sure if there are any Deliveroo employees here, but I want to thank you for 
 
 As a someone born after HTTP I imagine that life before services like Deliveroo and Uber was basically dark ages.
 Like, imagine having to navigate throught all the horrible restaurant menus, phone call (the horror!) someone, navigate the courier to your address.
+The torture!
 
 I'm not sure whether they are the first company that came up with the idea but certainly first one I've used and still using for a while. 
 #+END_NOTES
@@ -31,25 +44,33 @@ I'm not sure whether they are the first company that came up with the idea but c
 * The problem   
 No full-text menu search :(
 
-You can't find specific food you fancy or crave!
- 
+It's hard to find when you know what you want.
+
+** 
+[[file:pic/categories.png]]
+
+** 
+You can't find specific food!
+
+- craving things
+- varying your diet
+- accomodating multiple people's prefs at the same time
+   
 #+BEGIN_NOTES
 I personally try to ignore specific dietary recommendations which are often not supported by evidence 
 and instead try to eat as many different kinds of food as I can.
 #+END_NOTES
 
 ** 
-[[file:~/Pictures/scrapyroo/categories.png]]
+
+[[file:pic/tabs.png]]
+*** TODO quick demo maybe? not worth it..                          :noexport:
 
 #+BEGIN_NOTES
  Say, you want some tuna. Best you can do is open all 15 places that serve fish in different tabs,
  Ctrl-F tuna and then try to decide among them.
 #+END_NOTES
 
-** 
-
-[[file:~/Pictures/scrapyroo/tabs.png]]
-*** TODO quick demo maybe? not worth it..                          :noexport:
 
 ** Pathetic! 🙄
 Full text search is a basic human right!     
@@ -58,7 +79,7 @@ Full text search is a basic human right!
 Pathetic workflow.
 I asked people and that's apparently what they accept and never even questioned!  
 
-Human brains are good at creativity.
+It feel very wrong to me because human brains are good at creativity.
 Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to abuse it.
 #+END_NOTES  
 
@@ -68,9 +89,9 @@ Not so good at text search -- that's one of things computers are exceptionally g
   
 - scrape menu data off Deliveroo website
 - index data to provide quick search
-#+BEGIN_NOTES
-Presumably, you also want stemming, e.g. removing inflection, so the's no differensce, e.g. between 'grill and grilled'
-#+END_NOTES
+  #+BEGIN_NOTES
+  Presumably, you also want stemming, e.g. removing inflection, so the's no differensce, e.g. between 'grill and grilled'
+  #+END_NOTES
 - backend to serve indexed data 
 - frontend to search in the data
 
@@ -85,6 +106,8 @@ e.g. every day at 10 AM?
 
 ** Scraping menus
 Luckily, almost no need for parsing HTML! (demo)
+
+TODO add example of json
 
 #+BEGIN_NOTES
 demo: go to some restaurant, e.g.
@@ -104,11 +127,34 @@ could also say sorry to Deliveroo developers for public dissection
 Tantivy!   
 # TODO maybe put more information here
 
+** Frontend
+HTML and some Javascript/React
+
 * Scrapyroo
+  
+TODO move demo earlier?
   
 (Live demo)
 # TODO put a link here?
 # TODO pub a backup link to my online instnce
+
+#+BEGIN_NOTES
+- ui perhaps is a bit rough
+- search as you type
+  Demonstrate e.g. on mussels AND cheescake
+- request to the index on almost every keystroke, wonder if we could benefit somehow?
+  Demonstrate in dev tools
+- works from phone as well as desktop browser
+- debug
+ 
+- TODO group query. mussels AND 'chicken salad'
+  without full text search there is no way you would even find it
+  TODO soup AND curry?
+
+
+#+END_NOTES
+** TODO [#B] mm, too much data is transferred
+probably because of snippets
 
 ** TODO [#A] make sure it runs on my laptop!!!
    SCHEDULED: <2019-11-16 Sat>
@@ -133,21 +179,11 @@ Easier to demonstrate to other people and access from any computer. (TODO eh, al
 - TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
 
 * Tantivy: good
-- well documented, easy to modfy
-- CLI: simply awesome
-- TODO python bindings
- 
-** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
+TODO move this slide earlier? First what's good/bad about tantivy and only later put the enhancing slide?
 
-* Tantivy: bad
-- no nested document queries (yet)
-#+BEGIN_NOTES
-Connecting search terms with AND is a bit awkward
-you can't return matched menu items only, have to index and serve whole menu.
-It's not so bad though, I'm relying on line breaks to display matched items.
-#+END_NOTES
-
-- no index updates
+Features:
+- highlight positions
+- atomic index updates
 
 TODO hmm actually it's not exactly true? CLI just takes last version of the searcher?
 #+BEGIN_NOTES
@@ -156,6 +192,23 @@ https://github.com/tantivy-search/tantivy-cli/issues/17#issuecomment-316222907
 Can be potentially hacked/hot swapped at least in CLI.
 For now I'm just restarting it every night.
 #+END_NOTES
+
+** 
+- well documented, easy to modfy
+- CLI: simply awesome
+- python bindings (TODO demo snippet)
+
+ 
+** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
+
+* Tantivy: bad
+- no nested document supports (yet)
+TODO e.g. starter:dumpling AND main:salad
+  #+BEGIN_NOTES
+  Connecting search terms with AND is a bit awkward
+  you can't return matched menu items only, have to index and serve whole menu.
+  It's not so bad though, I'm relying on line breaks to display matched items.
+  #+END_NOTES
 
   
 * Rust observations
@@ -177,11 +230,17 @@ Especially to VPS, which only (huh!) got two cores and wouldn't handle compiling
 #+END_NOTES
 
 - musl -- way simpler than I imagined!
+TODO mention that it's a minimal libc (important for standalone!)
 
 - python library -- surprisingly simple integration?  
 - TODO unicode thing
 - TODO serde/derive Serialize?
-- TODO trait thing?  
+ orphan rule
+TODO just remove this
+- TODO trait thing?
+- TODO demonstrate how it's easy to use cargo install and point at specific branch/tag
+  disclaimer -- it's not the same verions of Tantivy that's in master and it's a great thing!
+  I managed to run this with the minimal effort.
   
 * Contributions back  
 Pull requests in progress!
@@ -213,6 +272,10 @@ Easy to mess with jq
 
 
 * Outtakes  
+- TODO rust, tantivy
+- discovered places I'd have never found otherwise
+- my life is simpler now!
+  don't have to browse through the website
 - you don't have to suffer from inconvenience in your life   
 
 #+BEGIN_NOTES
