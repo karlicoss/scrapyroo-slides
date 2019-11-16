@@ -6,37 +6,47 @@
 #+REVEAL_TRANS: linear
 #+REVEAL_EXTRA_CSS: ./noexport.css
 
-* slide 1 :noexport:
-
 * Thanks for Deliveroo   
   
 #+BEGIN_NOTES
-I'm not sure whether they are the first company that came up with the idea but certainly first one I've used and still using for a while. 
+Not sure if there are any Deliveroo employees here, but I want to thank you for a great product!
 
 As a someone born after HTTP I imagine that life before services like Deliveroo and Uber was basically dark ages.
+Like, imagine having to navigate throught all the horrible restaurant menus, phone call (the horror!) someone, navigate the courier to your address.
 
+I'm not sure whether they are the first company that came up with the idea but certainly first one I've used and still using for a while. 
 #+END_NOTES
 
-* TODO xx :noexport:
-  ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
+** TODO xx                                                         :noexport:
+   ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
   
-  
-* Motivation
+* The problem   
+No full-text menu search :(
 
-No search  
-
-- best you can do 
+You can't find specific food you fancy or crave!
+ 
 #+BEGIN_NOTES
- Anyway, then you open all the 15 restaurants that serve fish in different tabs, Ctrl-F tuna and then.
+I personally try to ignore specific dietary recommendations which are often not supported by evidence 
+and instead try to eat as many different kinds of food as I can.
+
+
+
 #+END_NOTES
 
-** Pathetic!
-🙄
-*** TODO use some different meme?
+** 
+[[file:~/Pictures/scrapyroo/categories.png]]
 
-** TODO quick demo maybe? not worth it..
+#+BEGIN_NOTES
+ Say, you want some tuna. Best you can do is open all 15 places that serve fish in different tabs,
+ Ctrl-F tuna and then try to decide among them.
+#+END_NOTES
 
-* Full text search is a basic human right!  
+** 
+
+[[file:~/Pictures/scrapyroo/tabs.png]]
+
+** Pathetic! 🙄
+Full text search is a basic human right!     
 
 #+BEGIN_NOTES
 I asked people and that's apparently what they accept and never even questioned!  
@@ -45,7 +55,10 @@ Human brains are good at creativity.
 Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to abuse it.
 #+END_NOTES  
 
-  
+*** TODO use some different meme? :noexport:
+
+** TODO quick demo maybe? not worth it..
+
 * What can we do?
   
 - scrape data off Deliveroo website
@@ -56,6 +69,7 @@ Not so good at text search -- that's one of things computers are exceptionally g
 600 restaurants deliver to my postcode
 50Mb json file (although lots of it is not so useful?)
 #+END_NOTES
+** TODO [2019-11-16 Sat 11:10] demonstrate stuff live in javascript (and say sorry, it's like watching your ???)
 
 * Why Tantivy?
 
@@ -267,5 +281,10 @@ You can program. You are literally capable of anything you can think of.
 ** TODO It is ok to employ someone to search for you, but not too implement the search yourself? I'd say the former feels wrong :scrapyroo:
    :PROPERTIES:
    :CREATED:  [2019-11-12 Tue 09:44]
+   :END:
+
+** TODO Tantivy could even have static html in addition to serve API? :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-12 Tue 00:37]
    :END:
 
