@@ -1,10 +1,18 @@
 #+TITLE: Scrapyroo
 #+AUTHOR: Dmitrii Gerasimov
 #+EMAIL: karlicoss@gmail.com
-#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+REVEAL_THEME: night
-#+REVEAL_TRANS: linear
+# #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_ROOT: ./reveal.js-3.8.0
 #+REVEAL_EXTRA_CSS: ./noexport.css
+# #+REVEAL_TRANS: linear
+
+* Past rust experience
+Virtually none apart from some Project Euler
+
+#+BEGIN_NOTES
+I am comfortable with many different other programming languages though and have been following Rust news.
+#+END_NOTES
+
 
 * Thanks for Deliveroo   
   
@@ -28,9 +36,6 @@ You can't find specific food you fancy or crave!
 #+BEGIN_NOTES
 I personally try to ignore specific dietary recommendations which are often not supported by evidence 
 and instead try to eat as many different kinds of food as I can.
-
-
-
 #+END_NOTES
 
 ** 
@@ -44,11 +49,13 @@ and instead try to eat as many different kinds of food as I can.
 ** 
 
 [[file:~/Pictures/scrapyroo/tabs.png]]
+*** TODO quick demo maybe? not worth it..                          :noexport:
 
 ** Pathetic! 🙄
 Full text search is a basic human right!     
 
 #+BEGIN_NOTES
+Pathetic workflow.
 I asked people and that's apparently what they accept and never even questioned!  
 
 Human brains are good at creativity.
@@ -57,24 +64,60 @@ Not so good at text search -- that's one of things computers are exceptionally g
 
 *** TODO use some different meme? :noexport:
 
-** TODO quick demo maybe? not worth it..
-
 * What can we do?
   
-- scrape data off Deliveroo website
-- ?????
-- 
+- scrape menu data off Deliveroo website
+- index data to provide quick search
+#+BEGIN_NOTES
+Presumably, you also want stemming, e.g. removing inflection, so the's no differensce, e.g. between 'grill and grilled'
+#+END_NOTES
+- backend to serve indexed data 
+- frontend to search in the data
+
+# TODO transition to NON-PROFIT section (I'm not trying to compete with Deliveroo!)  
 
 #+BEGIN_NOTES
+e.g. every day at 10 AM?
+
 600 restaurants deliver to my postcode
 50Mb json file (although lots of it is not so useful?)
 #+END_NOTES
-** TODO [2019-11-16 Sat 11:10] demonstrate stuff live in javascript (and say sorry, it's like watching your ???)
+
+** Scraping menus
+Luckily, almost no need for parsing HTML! (demo)
+
+#+BEGIN_NOTES
+demo: go to some restaurant, e.g.
+https://deliveroo.co.uk/menu/london/spitalfields/tokyo-sushi-finsbury-park
+open chrome inspector and type
+{"
+should result in large blog js-react-on-rails-context
+
+could also say sorry to Deliveroo developers for public dissection
+
+#+END_NOTES
+
+*** TODO eh, could demonstrate scraping code?                      :noexport:
+
+** Indexing menus & serving data
+
+Tantivy!   
+# TODO maybe put more information here
+
+* Scrapyroo
+  
+(Live demo)
+# TODO put a link here?
+# TODO pub a backup link to my online instnce
+
+** TODO [#A] make sure it runs on my laptop!!!
+   SCHEDULED: <2019-11-16 Sat>
+
+** TODO [#C] think which things should I demonstrate?
 
 * Why Tantivy?
 
 - initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone
-- G
 - also, why not?
 
 #+BEGIN_NOTES
@@ -85,35 +128,42 @@ Easier to demonstrate to other people and access from any computer. (TODO eh, al
 
 ** TODO might be actually good to find out if there are any alternatives :noexport:
 
-* Tantvy: enhancing
-** TODO demonstrate lack of snippets with a checkbox?
-** TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
+* Tantivy: enhancing
+- TODO demonstrate lack of snippets with a checkbox?
+- TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
 
 * Tantivy: good
-
 - well documented, easy to modfy
-- CLI: awesome!
-
-#+BEGIN_NOTES
-
-#+END_NOTES  
+- CLI: simply awesome
+- TODO python bindings
+ 
+** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
 
 * Tantivy: bad
-  
 - no nested document queries (yet)
-- no index 'updates', need to recreate?
-
-  
-* Past rust experience
-Virtually none apart from some projecteuler
-
 #+BEGIN_NOTES
+Connecting search terms with AND is a bit awkward
+you can't return matched menu items only, have to index and serve whole menu.
+It's not so bad though, I'm relying on line breaks to display matched items.
 #+END_NOTES
 
+- no index updates
+
+TODO hmm actually it's not exactly true? CLI just takes last version of the searcher?
+#+BEGIN_NOTES
+https://github.com/tantivy-search/tantivy-cli/issues/17#issuecomment-316222907
+
+Can be potentially hacked/hot swapped at least in CLI.
+For now I'm just restarting it every night.
+#+END_NOTES
+
+  
 * Rust observations
 - cargo makes it *very* easy to change dependency to local
 
 #+BEGIN_NOTES
+(a bit random observations?)
+
 There is tantivy, tantivy-cli and tantivy-py.
 
 I was experimenting with exposing this snippet API from tantivy so needed to change dependency 
@@ -121,12 +171,17 @@ I was experimenting with exposing this snippet API from tantivy so needed to cha
 E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
 #+END_NOTES
 
-- single binary -- very easy to deploy to VPS, which only (huh!) got two cores and wouldn't handle compiling
+- single binary -- very easy to deploy
+#+BEGIN_NOTES
+Especially to VPS, which only (huh!) got two cores and wouldn't handle compiling Rust well
+#+END_NOTES
 
 - musl -- way simpler than I imagined!
 
 - python library -- surprisingly simple integration?  
 - TODO unicode thing
+- TODO serde/derive Serialize?
+- TODO trait thing?  
   
 * Contributions back  
 Pull requests in progress!
@@ -152,9 +207,6 @@ Easy to mess with jq
 
 #+END_NOTES
 
-* How it works
-- TODO demonstrate json data inside html page
-
 
 * Details
 ** TODO how are scores calculated?
@@ -164,11 +216,14 @@ Easy to mess with jq
 - you don't have to suffer from inconvenience in your life   
 
 #+BEGIN_NOTES
-You can program. You are literally capable of anything you can think of.
+You can program.
+You are literally capable of anything you can think of and can bend the interactions with the outside world the way you want.
 #+END_NOTES  
 
 * TODO Credits
   
+* Questions?
+
 
 * TODO  reveal help :noexport:
 - https://github.com/yjwen/org-reveal
