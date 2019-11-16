@@ -114,6 +114,16 @@ E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
 - python library -- surprisingly simple integration?  
 - TODO unicode thing
   
+* Contributions back  
+Pull requests in progress!
+- exposing snippets
+- simple React sandbox to interact with CLI backend and make running even easier
+TODO demonstrate cli command?
+  
+#+BEGIN_NOTES
+returning html isn't gonna work well, you'd want to restyle it
+#+END_NOTES  
+
 * Why python scripts?
 
 - interactive
