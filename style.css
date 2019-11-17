@@ -1,0 +1,10 @@
+.reveal .noreveal { visibility: hidden; }
+/* TODO differentiate */
+.reveal .noexport { visibility: hidden; }
+
+.reveal .slide-footer {
+    color: red;
+    text-transform: uppercase;
+}
+
+/* TODO ?? .reveal aside.notes */

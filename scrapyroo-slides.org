@@ -1,10 +1,16 @@
 #+TITLE: Scrapyroo
-#+AUTHOR: Dmitrii Gerasimov
+#+AUTHOR: Dima Gerasimov
 #+EMAIL: karlicoss@gmail.com
 # #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_ROOT: ./reveal.js-3.8.0
-#+REVEAL_EXTRA_CSS: ./noexport.css
+#+REVEAL_EXTRA_CSS: ./style.css
 # #+REVEAL_TRANS: linear
+#+REVEAL_SLIDE_FOOTER:  <div class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></div>
+#+REVEAL_TITLE_SLIDE:    <h1 class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></h1>
+#+REVEAL_TITLE_SLIDE: <h2 class='author'>%a</h2>
+# #+REVEAL_TITLE_SLIDE: %e
+
+#+OPTIONS: toc:nil
 
 # TODO FIXME color R and OO?
 
