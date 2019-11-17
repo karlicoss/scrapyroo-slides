@@ -3,7 +3,8 @@
 #+EMAIL: karlicoss@gmail.com
 # #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_ROOT: ./reveal.js-3.8.0
-#+REVEAL_EXTRA_CSS: ./style.css
+#+REVEAL_EXTRA_CSS: ./style-reveal.css
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="style.css" />
 # #+REVEAL_TRANS: linear
 #+REVEAL_SLIDE_FOOTER:  <div class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></div>
 #+REVEAL_TITLE_SLIDE:    <h1 class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></h1>
@@ -14,13 +15,12 @@
 
 #+OPTIONS: toc:nil
 
-# TODO FIXME color R and OO?
+#+BEGIN_NOTES
+Hi, I'm Dima and today I'm gonna tell you about Scrapyroo, which is a tool I implemented to search over Deliveroo menus and make my life a bit easier.
 
-
-# TODO FIXME ispell
-
-# Hi, my name is and today I'm gonna tell you about Scrapyroo, which is a tool I implemented to search over Deliveroo menus
-# I'm not employed by Deliveroo by the way! So it's not like I'm just pitching you the feature I implemented on my day job :P
+Also just to make clear: I'm not employed by Deliveroo!
+So it's not like I'm just pitching you the feature I implemented on my day job :P
+#+END_NOTES
 
 * Past rust experience
 Virtually none apart from some Project Euler

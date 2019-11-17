@@ -1,0 +1,17 @@
+.reveal {
+    /* eh, doesn't help for bluer either... */
+    /* font-family: Helvetica, sans-serif; */
+}
+
+.reveal .noreveal { visibility: hidden; }
+/* TODO differentiate */
+.reveal .noexport { visibility: hidden; }
+
+.reveal .slide-footer {
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    font-size: small;
+}
+
+/* TODO ?? .reveal aside.notes */
