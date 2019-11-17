@@ -22,8 +22,8 @@ Also just to make clear: I'm not employed by Deliveroo!
 So it's not like I'm just pitching you the feature I implemented on my day job :P
 #+END_NOTES
 
-* Past rust experience
-Virtually none apart from some Project Euler
+* Past Rust experience
+Virtually none apart from some Project Euler.
 
 #+BEGIN_NOTES
 I wouldn't necessarily call it a project as I got away with not writing much of new Rust code.
@@ -34,39 +34,49 @@ I am comfortable with many different other programming languages though and have
 #+END_NOTES
 
 
-* Thanks for Deliveroo   
+* Deliveroo is great!
   
+- TOOD some notes here?  
+
 #+BEGIN_NOTES
 Not sure if there are any Deliveroo employees here, but I want to thank you for a great product!
 
-As a someone born after HTTP I imagine that life before services like Deliveroo and Uber was basically dark ages.
-Like, imagine having to navigate throught all the horrible restaurant menus, phone call (the horror!) someone, navigate the courier to your address.
-The torture!
+As a millenial/someone born in mid 90s, I am imagining life before services like Deliveroo and Uber as some sort of dark ages.
 
-I'm not sure whether they are the first company that came up with the idea but certainly first one I've used and still using for a while. 
+My older friends told be some dreadful stories. Apparently you'd browse through paper menus, have to phone call the operator and coordinate the courier?
 #+END_NOTES
 
-** TODO xx                                                         :noexport:
-   ugh, thought of using this meme, but could be taken as racist :( https://www.meme-arsenal.com/create/template/447271
-  
 * The problem   
 No full-text menu search :(
 
-It's hard to find when you know what you want.
+It's ok for getting *something* to eat, but not great when you know what you want to order.
 
-** 
-[[file:pic/categories.png]]
-
-** 
-You can't find specific food!
+** You can't find specific food!
 
 - craving things
 - varying your diet
 - accomodating multiple people's prefs at the same time
    
 #+BEGIN_NOTES
-I personally try to ignore specific dietary recommendations which are often not supported by evidence 
-and instead try to eat as many different kinds of food as I can.
+Craving: e.g. if you want some dessert you better get something you'd actually enjoy instead of mediocre one because that's what the restaurant offered.
+
+Varying: I'm trying to expose myself to all kinds of food to make sure I'm not missing on some important nutrients.
+
+Multiple people: say you want some ??? and your friend fancies ??? TODO need to use same example I'm about to use in demo
+#+END_NOTES
+
+** 
+[[file:pic/categories.png]]
+
+#+BEGIN_NOTES
+Just to demonstrate what I'm talking about, here's the Deliveroo web interface (mobile looks similar).
+
+You can filter by dietary restrictions, fair enough, but then finest you can do is to pick "Categories".
+
+Some of them kinda make sense (e.g. "Bagels"), some of them are too broad (e.g. what is "Asian/American"? could be anything).
+Some of them are just plain weird, like what is "Back to school" supposed to mean?
+
+This is the best you're gonna get from Deliveroo.
 #+END_NOTES
 
 ** 
@@ -80,15 +90,14 @@ and instead try to eat as many different kinds of food as I can.
 #+END_NOTES
 
 
-** Pathetic! 🙄
+** Sad!
 Full text search is a basic human right!     
 
 #+BEGIN_NOTES
-Pathetic workflow.
 I asked people and that's apparently what they accept and never even questioned!  
 
 It feel very wrong to me because human brains are good at creativity.
-Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to abuse it.
+Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to exploit that.
 #+END_NOTES  
 
 *** TODO use some different meme? :noexport:
@@ -414,3 +423,5 @@ You are literally capable of anything you can think of and can bend the interact
    :CREATED:  [2019-11-12 Tue 00:37]
    :END:
 
+
+* TODO Ispell                                                      :noexport:
