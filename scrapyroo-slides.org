@@ -8,7 +8,9 @@
 #+REVEAL_SLIDE_FOOTER:  <div class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></div>
 #+REVEAL_TITLE_SLIDE:    <h1 class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></h1>
 #+REVEAL_TITLE_SLIDE: <h2 class='author'>%a</h2>
-# #+REVEAL_TITLE_SLIDE: %e
+#+REVEAL_HEAD_PREAMBLE: <script src='hack-footer.js'></script>
+# TODO wtf it looks a bit blurry in Firefox.. don't think font is the issue
+#+REVEAL_HEAD_PREAMBLE: <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 
 #+OPTIONS: toc:nil
 
