@@ -209,11 +209,14 @@ https://github.com/tantivy-search/tantivy-cli/issues/17#issuecomment-316222907
 Can be potentially hacked/hot swapped at least in CLI.
 For now I'm just restarting it every night.
 #+END_NOTES
+- [[https://github.com/tantivy-search/tantivy-py][Python bindings]]
 
 ** 
 - well documented, easy to modfy
 - CLI: simply awesome
-- python bindings (TODO demo snippet)
+  #+BEGIN_NOTES
+  Takes you from 0 to prototype in a matter of minutes without distracting on irrelevant stuff.
+  #+END_NOTES
 
  
 ** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
