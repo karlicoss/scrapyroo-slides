@@ -5,7 +5,7 @@
 
 .reveal .noreveal { visibility: hidden; }
 /* TODO differentiate */
-.reveal .noexport { visibility: hidden; }
+.reveal .noexport { color: red; }
 
 .reveal .slide-footer {
     text-transform: uppercase;

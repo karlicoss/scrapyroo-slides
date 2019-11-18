@@ -36,7 +36,7 @@ I am comfortable with many different other programming languages though and have
 
 * Deliveroo is great!
   
-- TOOD some notes here?  
+- TODO some notes here?  
 
 #+BEGIN_NOTES
 Not sure if there are any Deliveroo employees here, but I want to thank you for a great product!
@@ -85,10 +85,11 @@ This is the best you're gonna get from Deliveroo.
 *** TODO quick demo maybe? not worth it..                          :noexport:
 
 #+BEGIN_NOTES
- Say, you want some tuna. Best you can do is open all 15 places that serve fish in different tabs,
+ Say, you want some grilled tuna and green vegetables. 
+ 
+ Best you can do is open all 15 places that serve fish in different tabs,
  Ctrl-F tuna and then try to decide among them.
 #+END_NOTES
-
 
 ** Sad!
 Full text search is a basic human right!     
@@ -96,64 +97,62 @@ Full text search is a basic human right!
 #+BEGIN_NOTES
 I asked people and that's apparently what they accept and never even questioned!  
 
-It feel very wrong to me because human brains are good at creativity.
-Not so good at text search -- that's one of things computers are exceptionally good at and we're ought to exploit that.
+It feels especially wrong to me because human brains are good at creativity.
+Not so good at stuff like text search -- that's one of things computers are *exceptionally* good at and we're ought to exploit that.
 #+END_NOTES  
 
 *** TODO use some different meme? :noexport:
 
 * What can we do?
   
+# TODO FIXME diagram here?
+
 - scrape menu data off Deliveroo website
-- index data to provide quick search
   #+BEGIN_NOTES
-  Presumably, you also want stemming, e.g. removing inflection, so the's no differensce, e.g. between 'grill and grilled'
+  e.g. every day at 10 AM
+  
+  600 restaurants deliver to my postcode
+  50Mb json file (TODO although lots of it is not so useful?)
+  #+END_NOTES
+- index data to allow for quick search
+  #+BEGIN_NOTES
+  Indexing needed mostly because I want
+
+  - search operators
+  - stemming, e.g. removing inflection, so there's no differensce, between 'grill and grilled'
   #+END_NOTES
 - backend to serve indexed data 
 - frontend to search in the data
 
-# TODO transition to NON-PROFIT section (I'm not trying to compete with Deliveroo!)  
-
-#+BEGIN_NOTES
-e.g. every day at 10 AM?
-
-600 restaurants deliver to my postcode
-50Mb json file (although lots of it is not so useful?)
-#+END_NOTES
-
 ** Scraping menus
-Luckily, almost no need for parsing HTML! (demo)
+Python ([[https://github.com/scrapy/scrapy][scrapy]]). Luckily, almost no need for HTML parsing!
 
-TODO add example of json
+[[file:pic/json.png]]
 
 #+BEGIN_NOTES
-demo: go to some restaurant, e.g.
+Go to some restaurant, e.g.
 https://deliveroo.co.uk/menu/london/spitalfields/tokyo-sushi-finsbury-park
-open chrome inspector and type
-{"
-should result in large blog js-react-on-rails-context
+open chrome inspector and type ~{"~ .  ~js-react-on-rails-context~ should be among the results.
 
-could also say sorry to Deliveroo developers for public dissection
-
+If there are any Deliveroo developers here, sorry for public dissection!
 #+END_NOTES
-
-*** TODO eh, could demonstrate scraping code?                      :noexport:
 
 ** Indexing menus & serving data
 
-Tantivy!   
-# TODO maybe put more information here
+[[https://github.com/tantivy-search/tantivy][Tantivy]]!   
+
+#+BEGIN_NOTES
+I'm going to be explaining why it works well in the presentation.
+#+END_NOTES
 
 ** Frontend
 HTML and some Javascript/React
 
 * Scrapyroo
   
-TODO move demo earlier?
-  
 (Live demo)
 # TODO put a link here?
-# TODO pub a backup link to my online instnce
+# TODO put a backup link to my online instnce
 
 #+BEGIN_NOTES
 - ui perhaps is a bit rough
@@ -170,13 +169,14 @@ TODO move demo earlier?
 
 
 #+END_NOTES
-** TODO [#B] mm, too much data is transferred
-probably because of snippets
+** TODOs :noreveal:
+*** TODO [#B] mm, too much data is transferred
+ probably because of snippets
 
-** TODO [#A] make sure it runs on my laptop!!!
-   SCHEDULED: <2019-11-16 Sat>
+*** TODO [#A] make sure it runs on my laptop!!! 
+    SCHEDULED: <2019-11-16 Sat>
 
-** TODO [#C] think which things should I demonstrate?
+*** TODO [#C] think which things should I demonstrate?
 
 * Why Tantivy?
 
