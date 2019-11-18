@@ -60,7 +60,7 @@ It's ok for getting *something* to eat, but not great when you know what you wan
 - accomodating multiple people's prefs at the same time
    
 #+BEGIN_NOTES
-Craving: e.g. if you want some dessert you better get something you'd actually enjoy instead of mediocre one because that's what the restaurant offered.
+Craving: e.g. if you want to treat yourself with some dessert, better get something you'd *really* enjoy instead of mediocre one because that's what the restaurant offered.
 
 Varying: I'm trying to expose myself to all kinds of food to make sure I'm not missing on some important nutrients.
 
@@ -283,6 +283,17 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   With Rust it turned out to be a matter of adding a target via rustup and that's it!
   #+END_NOTES
 
+- TODO write about [[https://doc.rust-lang.org/rust-by-example/trait/derive.html][derive]] debug/serialize
+
+  #+BEGIN_NOTES
+  First seen in Haskell!
+ 
+  Python: kind of there via NamedTuples/dataclasses
+  
+  I often miss it in C++!
+  You can implement it with templates, macros or ~boost::preprocessor~ depending on how much you hate yourself/your team :P
+  But it's a very reasonable default feature to have.
+  #+END_NOTES
 
 ** Enhancing Tantivy  
 - cargo: *very* easy to change dependency to local
@@ -349,9 +360,24 @@ Questions?
 * Appendix: Tantivy details
 - how are scores calculated?
   
-  Demonstrate [[https://docs.rs/tantivy/0.10.3/tantivy/query/trait.Query.html#method.explain][explain]] in logs?
+  See [[https://docs.rs/tantivy/0.10.3/tantivy/query/struct.Explanation.html][~Explanation~]]. Basically builds a computation tree for a given match.
+  
+  Demonstrate [[https://docs.rs/tantivy/0.10.3/tantivy/query/trait.Query.html#method.explain][~explain~]] in logs?
 
-  It's a little rough at the moment.
+  'pretty' json is a little rough at the moment.
+  
+- how are snippets selected?
+
+  See [[https://github.com/tantivy-search/tantivy/blob/42756c7474317c2b1aa0610278b54c0bb0c70fb9/src/snippet/mod.rs#L144][~search_fragment~]]
+  
+  Somewhat heuristic: 
+
+  #+BEGIN_QUOTE
+  The returned list is non-empty and contain less than 12 possibly overlapping fragments.
+  
+  It is ok to emit non-overlapping fragments, for instance, one short and one long containing the same keyword, in order
+  to leave optimization opportunity to the fragment selector upstream.
+  #+END_QUOTE
 
 * Appendix: random Rust things
 
