@@ -36,14 +36,16 @@ I am comfortable with many different other programming languages though and have
 
 * Deliveroo is great!
   
-- TODO some notes here?  
+I can't imagine ordering food without a service like this.
 
 #+BEGIN_NOTES
 Not sure if there are any Deliveroo employees here, but I want to thank you for a great product!
 
 As a millenial/someone born in mid 90s, I am imagining life before services like Deliveroo and Uber as some sort of dark ages.
 
-My older friends told be some dreadful stories. Apparently you'd browse through paper menus, have to phone call the operator and coordinate the courier?
+My older friends told me some dreadful stories. Apparently you'd browse through paper menus, have to phone call the operator and coordinate the courier?
+
+Brrr.. I'm lucky to live now.
 #+END_NOTES
 
 * The problem   
@@ -101,8 +103,6 @@ It feels especially wrong to me because human brains are good at creativity.
 Not so good at stuff like text search -- that's one of things computers are *exceptionally* good at and we're ought to exploit that.
 #+END_NOTES  
 
-*** TODO use some different meme? :noexport:
-
 * What can we do?
   
 # TODO FIXME diagram here?
@@ -135,6 +135,15 @@ https://deliveroo.co.uk/menu/london/spitalfields/tokyo-sushi-finsbury-park
 open chrome inspector and type ~{"~ .  ~js-react-on-rails-context~ should be among the results.
 
 If there are any Deliveroo developers here, sorry for public dissection!
+
+#+END_NOTES
+
+#+BEGIN_NOTES
+TODO FIXME demonstrate bit of json that we get as input?
+
+Python is interactive and very suitable to mess with input json data. 
+
+It makes sense to keep it as json intermediately to checkpoint in case scraping/indexing fails.
 #+END_NOTES
 
 ** Indexing menus & serving data
@@ -155,13 +164,16 @@ HTML and some Javascript/React
 # TODO put a backup link to my online instnce
 
 #+BEGIN_NOTES
-- ui perhaps is a bit rough
+
+
+Features:
 - search as you type
-  Demonstrate e.g. on mussels AND cheescake
+  Demonstrate e.g. on mussels AND cheescake TODO FIXME think about query
 - request to the index on almost every keystroke, wonder if we could benefit somehow?
   Demonstrate in dev tools
 - works from phone as well as desktop browser
-- debug
+- debug? maybe later if I got a bit more time
+- ui perhaps is a bit rough
  
 - TODO group query. mussels AND 'chicken salad'
   without full text search there is no way you would even find it
@@ -181,90 +193,123 @@ HTML and some Javascript/React
 * Why Tantivy?
 
 - initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone
+  #+BEGIN_NOTES
+  Need to carry data inside the huge html -- not that great.
+  
+  You need Internet anyway to make an order, so I didn't mind having a proper backend.
+  #+END_NOTES
+
 - also, why not?
 
-#+BEGIN_NOTES
-Also need to carry data inside the huge html -- not that great.
-Surprisingly, very few people use something like Dropbox!
-Easier to demonstrate to other people and access from any computer. (TODO eh, although same would be with static html page)
-#+END_NOTES
+  #+BEGIN_NOTES
+  Wanted to try out Rust for some real project.
 
-** TODO might be actually good to find out if there are any alternatives :noexport:
+  Never used any other search engine libraires and was recommended Tantivy.
+  #+END_NOTES
+
+* Tantivy: good
+
+Features:
+- [[https://docs.rs/tantivy/0.10.3/tantivy/struct.Snippet.html][highlight positions]], snippets
+  #+BEGIN_NOTES
+  alt-tab to the presentation and show what I mean by snippets?
+
+  Without the snippet (tick the thing and remove highlights? (TODO FIXME make sure I can tick it off!!)).
+  #+END_NOTES
+- [[https://docs.rs/tantivy/0.10.3/tantivy/struct.IndexWriter.html][transactional]] index updates
+  #+BEGIN_NOTES
+  add/delete/rollback/commit
+  #+END_NOTES
+- [[https://docs.rs/tantivy/0.10.3/tantivy/enum.ReloadPolicy.html][autoreloading]] latest commit in searchers 
+  #+BEGIN_NOTES
+  
+  Caveat: have to be careful when deploying index remotely, ~meta.json~ file has to be deployed *last*!
+
+  I'm in progress of writing up a github issue, will put the link here.  
+  #+END_NOTES
+- [[https://github.com/tantivy-search/tantivy-py][Python bindings]]
+- well documented, easy to modfy
+
+  TODO FIXME add gitter links here?
+  TODO FIXME always display help in interface?
+  
+** TODO implement facets quickly?                                  :noreveal:
+
+** Tantivy CLI: awesome
+Takes you from zero to prototype in a matter of minutes without distracting on irrelevant stuff.
+
+- TODO elaborate
+- CLI: simply awesome
+  #+BEGIN_NOTES
+  And I'm not exaggerating about minutes!
+  
+  I spent most time on scraping and frontend.
+  #+END_NOTES
+
+** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noreveal:
+
+* Tantivy: bad
+- no nested document support ([[https://github.com/tantivy-search/tantivy/issues/617][yet]])
+   
+  - would be nice to have queries like =starter:dumpling AND main:salad=
+  - potentially more resource wasteful
+  #+BEGIN_NOTES
+  You can't return matched menu items only, have to index and serve the whole menu.
+  
+  It's not too bad though, I'm getting around this by relying on line breaks to only display matched items.
+  #+END_NOTES
 
 * Tantivy: enhancing
 - TODO demonstrate lack of snippets with a checkbox?
 - TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
 
-* Tantivy: good
-TODO move this slide earlier? First what's good/bad about tantivy and only later put the enhancing slide?
-
-Features:
-- highlight positions
-- atomic index updates
-
-TODO hmm actually it's not exactly true? CLI just takes last version of the searcher?
-#+BEGIN_NOTES
-https://github.com/tantivy-search/tantivy-cli/issues/17#issuecomment-316222907
-
-Can be potentially hacked/hot swapped at least in CLI.
-For now I'm just restarting it every night.
-#+END_NOTES
-- [[https://github.com/tantivy-search/tantivy-py][Python bindings]]
-
-** 
-- well documented, easy to modfy
-- CLI: simply awesome
-  #+BEGIN_NOTES
-  Takes you from 0 to prototype in a matter of minutes without distracting on irrelevant stuff.
-  #+END_NOTES
-
- 
-** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
-
-* Tantivy: bad
-- no nested document supports (yet)
-TODO e.g. starter:dumpling AND main:salad
-  #+BEGIN_NOTES
-  Connecting search terms with AND is a bit awkward
-  you can't return matched menu items only, have to index and serve whole menu.
-  It's not so bad though, I'm relying on line breaks to display matched items.
-  #+END_NOTES
-
   
 * Rust observations
-- cargo makes it *very* easy to change dependency to local
+- single binary: very easy to deploy
+  #+BEGIN_NOTES
+  Especially on VPS, which only (huh!) got two cores and wouldn't handle compiling Rust well
+  #+END_NOTES
+- [[https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html][~musl~]]: minimal libc implementation
+  
+  ~sudo apt install musl-tools && rustup target add x86_64-unknown-linux-musl~
 
-#+BEGIN_NOTES
-(a bit random observations?)
+  ~cargo build --target x86_64-unknown-linux-musl~
+  
+  #+BEGIN_NOTES
+  Turned out my desktop and my VPS where I wanted to run the backend use different libc version.
 
-There is tantivy, tantivy-cli and tantivy-py.
+  Normally that would mean crosscompiling and all the associated horror.
+  
+  With Rust it turned out to be a matter of adding a target via rustup and that's it!
+  #+END_NOTES
 
-I was experimenting with exposing this snippet API from tantivy so needed to change dependency 
 
-E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
-#+END_NOTES
-
-- single binary -- very easy to deploy
-#+BEGIN_NOTES
-Especially to VPS, which only (huh!) got two cores and wouldn't handle compiling Rust well
-#+END_NOTES
-
-- musl -- way simpler than I imagined!
-TODO mention that it's a minimal libc (important for standalone!)
-
-- python library -- surprisingly simple integration?  
-- TODO unicode thing
-- TODO serde/derive Serialize?
- orphan rule
-TODO just remove this
-- TODO trait thing?
-- TODO demonstrate how it's easy to use cargo install and point at specific branch/tag
+** Enhancing Tantivy  
+- cargo: *very* easy to change dependency to local
+  #+BEGIN_NOTES
+  TODO FIXME demonstrate?
+  TODO FIXME demonstrate how it's easy to use cargo install and point at specific branch/tag
   disclaimer -- it's not the same verions of Tantivy that's in master and it's a great thing!
   I managed to run this with the minimal effort.
+
+  There is tantivy, tantivy-cli and tantivy-py.
   
+  I was experimenting with exposing this snippet API from tantivy so needed to change dependency 
+  
+  E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
+  #+END_NOTES
+
+- [[https://github.com/tantivy-search/tantivy-py][tantivy-py]]: surprisingly simple integration
+
+  Basically, a matter of ~pip install .~. Powered by https://github.com/PyO3/pyo3#using-rust-from-python
+  
+  #+BEGIN_NOTES
+  Also benefits from Rust ecosystem: e.g. can run ~cargo build~, etc. You just write normal Rust code.
+  #+END_NOTES  
+
 * Contributions back  
 Pull requests in progress!
-- exposing snippets
+- exposing highlights via CLI
 - simple React sandbox to interact with CLI backend and make running even easier
 TODO demonstrate cli command?
   
@@ -272,40 +317,50 @@ TODO demonstrate cli command?
 returning html isn't gonna work well, you'd want to restyle it
 #+END_NOTES  
 
-* Why python scripts?
-
-- interactive
-- easy to mess with data
-
-Happy to be proven otherwise, but would be surprised!
- 
-#+BEGIN_NOTES
-Basically it's good to keep json data externally in case indexing fails or something.
-
-Easy to mess with jq
-
-#+END_NOTES
-
-
-* Details
-** TODO how are scores calculated?
-
-
 * Outtakes  
-- TODO rust, tantivy
-- discovered places I'd have never found otherwise
+- rust & tantivy
+
+  Very pleasant experience, no frustration
+  
 - my life is simpler now!
-  don't have to browse through the website
+  
+  I don't have to waste time browsing through the website
+- discovered places I'd have never found otherwise
 - you don't have to suffer from inconvenience in your life   
 
-#+BEGIN_NOTES
-You can program.
-You are literally capable of anything you can think of and can bend the interactions with the outside world the way you want.
-#+END_NOTES  
+  #+BEGIN_NOTES
+  If you can program, you are literally capable of anything you can think of (well, given enough time :P).
+
+  You can bend the interactions with the outside world the way you want.
+  #+END_NOTES  
 
 * TODO Credits
   
-* Questions?
+* Thanks!
+  
+Questions?  
+
+  
+- [[https://github.com/karlicoss/scrapyroo][scrapyroo]] at Github
+- TODO add link to blog entry with slides
+- 🐦 [[https://twitter.com/karlicoss][twitter.com/karlicoss]]
+- 💻 [[https://github.com/karlicoss][github.com/karlicoss]]
+  
+* Appendix: Tantivy details
+- how are scores calculated?
+  
+  Demonstrate [[https://docs.rs/tantivy/0.10.3/tantivy/query/trait.Query.html#method.explain][explain]] in logs?
+
+  It's a little rough at the moment.
+
+* Appendix: random Rust things
+
+- Unicode handling
+  
+  didn't have time to figure it out, so I just stripped all non-ascii
+- [[https://github.com/serde-rs/serde][serde]] and ~#[derive(Serialize)]~
+  
+  ran into [[https://serde.rs/remote-derive.html][orphan rule]]
 
 
 * TODO  reveal help :noexport:
@@ -326,7 +381,11 @@ You are literally capable of anything you can think of and can bend the interact
 
   To skip exporting speaker notes, please set variable `org-reveal-ignore-speaker-notes` to `t`.
 
-** TODO use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
+** DONE use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
+   CLOSED: [2019-11-18 Mon 19:18]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-11-18 Mon 19:18]
+   :END:
 ** TODO [2019-11-15 Fri 22:43] hmm nice could just publish my presentation with notes as a post?
 ** TODO [#D] very easy to use local dependency (just point to direcory) when I wanted to hack tantivy :rust:scrapyroo:
    :PROPERTIES:
