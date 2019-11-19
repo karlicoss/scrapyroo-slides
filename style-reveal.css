@@ -3,7 +3,8 @@
     /* font-family: Helvetica, sans-serif; */
 }
 
-.reveal .noreveal { visibility: hidden; }
+/* eh, ok, that doesn' work */
+/* .reveal .noreveal { visibility: hidden; } */
 /* TODO differentiate */
 .reveal .noexport { color: red; }
 

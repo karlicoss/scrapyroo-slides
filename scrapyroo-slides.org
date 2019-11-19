@@ -187,32 +187,43 @@ HTML and some Javascript/React
 # TODO put a link here?
 # TODO put a backup link to my online instnce
 
-#+BEGIN_NOTES
+** Features
+   
+- search queries
+  #+BEGIN_NOTES
+  demo: say you want some halloumi and green vegetables.
+  
+  Type: 'halloumi AND vegetables'. Whoa, vegetable smoothie? No, thank you.
+  So we can add 'AND -"vegetable smoothie"'. Ah, that's better now!
+  
+  Say you want some desert. 'AND cheesecake' or 'AND "ice cream"'. Nice, few places serve this!
+  #+END_NOTES
+  
+  #+BEGIN_NOTES
+  Or you're ordering with two other friends. 
 
-
-Features:
+  One you want prawns, another one chicken salad, and the trird wants some feta.
+  
+  'prawns AND "chicken salad" AND "feta"' -- and we instantly find few matches!
+  
+  Without full text search there is no way you would ever find it.
+  #+END_NOTES
 - search as you type
-  Demonstrate e.g. on mussels AND cheescake TODO FIXME think about query
-- request to the index on almost every keystroke, wonder if we could benefit somehow?
+  #+BEGIN_NOTES
+  At the moment requests index on almost every keystroke, wonder if we could benefit somehow?
+  
   Demonstrate in dev tools
+  #+END_NOTES
 - works from phone as well as desktop browser
+
+#+BEGIN_NOTES
 - debug? maybe later if I got a bit more time
 - ui perhaps is a bit rough
- 
-- TODO group query. mussels AND 'chicken salad'
-  without full text search there is no way you would even find it
-  TODO soup AND curry?
-
-
 #+END_NOTES
-** TODOs :noreveal:
+
+** TODOs :noexport:
 *** TODO [#A] make sure it runs on my laptop!!! 
     SCHEDULED: <2019-11-16 Sat>
-
-*** STRT [#C] think which things should I demonstrate?
-    :LOGBOOK:
-    - State "STRT"       from "TODO"       [2019-11-19 Tue 07:20]
-    :END:
 
 * Why Tantivy?
 
@@ -254,10 +265,9 @@ Features:
 - [[https://github.com/tantivy-search/tantivy-py][Python bindings]]
 - well documented, easy to modfy
 
-  TODO FIXME add gitter links here?
   TODO FIXME always display help in interface?
   
-** TODO implement facets quickly?                                  :noreveal:
+** TODO implement facets quickly?                                  :noexport:
 
 ** Tantivy CLI: awesome
 Takes you from zero to prototype in a matter of minutes without distracting on irrelevant stuff.
@@ -270,7 +280,7 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   I spent most time on scraping and frontend.
   #+END_NOTES
 
-** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noreveal:
+** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
 
 * Tantivy: bad
 # TODO instead of 'bad': use smth different?  
@@ -278,7 +288,7 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
 - no nested document support ([[https://github.com/tantivy-search/tantivy/issues/617][yet]])
    
   - would be nice to have queries like =starter:dumpling AND main:salad=
-  - potentially more resource wasteful
+  - potentially less resource wasteful
   #+BEGIN_NOTES
   You can't return matched menu items only, have to index and serve the whole menu.
   
@@ -403,8 +413,15 @@ Pull requests in progress:
   You can bend the interactions with the outside world the way you want.
   #+END_NOTES  
 
-* TODO Credits
+* Credits
   
+- [[https://github.com/petr-tik][github.com/petr-tik]]
+#+BEGIN_NOTES
+Petr pushed me to actually give a talk, helped with Tantivy and gave me lots of helpful advice on improving the presentation. Thank you!
+
+He's passionate about Tantivy and will be happy to help you if you think something is missing or can be improved.
+#+END_NOTES
+
 * Thanks!
   :PROPERTIES:
   :CUSTOM_ID: fin
@@ -416,6 +433,10 @@ Questions?
 
 - [[https://github.com/karlicoss/scrapyroo][github.com/karlicoss/scrapyroo]]
 - TODO add link to blog entry with slides
+  #+BEGIN_NOTES
+  The presentation will be available as plain text (as well as my notes), so hopefully you won't miss anything.
+  #+END_NOTES
+
 
 Tantivy: 
 - [[https://github.com/tantivy-search][github.com/tantivy-search]]
@@ -473,6 +494,8 @@ Me:
 - https://github.com/yjwen/org-reveal
 - http://jr0cket.co.uk/2013/10/create-cool-slides--Org-mode-Revealjs.html.html
 - http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
+** TODO https://github.com/yjwen/org-reveal/issues/121
+    +OPTIONS: reveal_single_file:t ?
 
 * TODO x                                                           :noexport:
 ** ok, font sucks a bit?
@@ -590,6 +613,6 @@ Me:
    :PROPERTIES:
    :CREATED:  [2019-11-12 Tue 00:37]
    :END:
-
+** TODO ugh. it's unclear how to hide a subtree???
 
 * TODO Ispell                                                      :noexport:
