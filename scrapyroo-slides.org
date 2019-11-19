@@ -4,7 +4,7 @@
 # #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 #+REVEAL_EXTRA_CSS: ./style-reveal.css
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="style.css" />
+#+HTML_HEAD_EXTRA: <style>.NOTES {background-color: lightgray;}</style>
 # #+REVEAL_TRANS: linear
 #+REVEAL_SLIDE_FOOTER:  <div class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></div>
 #+REVEAL_TITLE_SLIDE:    <h1 class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></h1>
@@ -41,7 +41,7 @@ I can't imagine ordering food without a service like this.
 #+BEGIN_NOTES
 Not sure if there are any Deliveroo employees here, but I want to thank you for a great product!
 
-As a millenial/someone born in mid 90s, I am imagining life before services like Deliveroo and Uber as some sort of dark ages.
+As a millennial/someone born in mid 90s, I am imagining life before services like Deliveroo and Uber as some sort of dark ages.
 
 My older friends told me some dreadful stories. Apparently you'd browse through paper menus, have to phone call the operator and coordinate the courier?
 
@@ -57,14 +57,14 @@ It's ok for getting *something* to eat, but not great when you know what you wan
 
 - craving things
 - varying your diet
-- accomodating multiple people's prefs at the same time
+- accommodating multiple people's prefs at the same time
    
 #+BEGIN_NOTES
 Craving: e.g. if you want to treat yourself with some dessert, better get something you'd *really* enjoy instead of mediocre one because that's what the restaurant offered.
 
 Varying: I'm trying to expose myself to all kinds of food to make sure I'm not missing on some important nutrients.
 
-Multiple people: say you want some ??? and your friend fancies ??? TODO need to use same example I'm about to use in demo
+Multiple people: you and your friends want different things and you need to choose a single restaurant to order from.
 #+END_NOTES
 
 ** 
@@ -84,7 +84,6 @@ This is the best you're gonna get from Deliveroo.
 ** 
 
 [[file:pic/tabs.png]]
-*** TODO quick demo maybe? not worth it..                          :noexport:
 
 #+BEGIN_NOTES
  Say, you want some grilled tuna and green vegetables. 
@@ -105,27 +104,27 @@ Not so good at stuff like text search -- that's one of things computers are *exc
 
 * What can we do?
   
-# TODO FIXME diagram here?
-
+# TODO add diagram here?
 - scrape menu data off Deliveroo website
   #+BEGIN_NOTES
   e.g. every day at 10 AM
   
-  600 restaurants deliver to my postcode
-  50Mb json file (TODO although lots of it is not so useful?)
+  About 600 restaurants deliver to my postcode.
+  
+  50Mb json file (although lots of it are not so useful?)
   #+END_NOTES
-- index data to allow for quick search
+- index menu data
   #+BEGIN_NOTES
   Indexing needed mostly because I want
 
   - search operators
-  - stemming, e.g. removing inflection, so there's no differensce, between 'grill and grilled'
+  - stemming, e.g. removing inflection, so there's no difference, between 'grill and grilled'
   #+END_NOTES
 - backend to serve indexed data 
 - frontend to search in the data
 
 ** Scraping menus
-Python ([[https://github.com/scrapy/scrapy][scrapy]]). Luckily, almost no need for HTML parsing!
+Python ([[https://github.com/scrapy/scrapy][scrapy]]). Almost no need for HTML parsing!
 
 [[file:pic/json.png]]
 
@@ -185,7 +184,7 @@ HTML and some Javascript/React
   
 (Live demo)
 # TODO put a link here?
-# TODO put a backup link to my online instnce
+# TODO put a backup link to my online instance
 
 ** Features
    
@@ -202,7 +201,7 @@ HTML and some Javascript/React
   #+BEGIN_NOTES
   Or you're ordering with two other friends. 
 
-  One you want prawns, another one chicken salad, and the trird wants some feta.
+  One you want prawns, another one chicken salad, and the third wants some feta.
   
   'prawns AND "chicken salad" AND "feta"' -- and we instantly find few matches!
   
@@ -239,7 +238,7 @@ HTML and some Javascript/React
   #+BEGIN_NOTES
   Wanted to try out Rust for some real project.
 
-  Never used any other search engine libraires and was recommended Tantivy.
+  Never used any other search engine libraries and was recommended Tantivy.
   #+END_NOTES
 
 * Tantivy: good
@@ -249,7 +248,12 @@ Features:
   #+BEGIN_NOTES
   alt-tab to the presentation and show what I mean by snippets?
 
-  Without the snippet (tick the thing and remove highlights? (TODO FIXME make sure I can tick it off!!)).
+  Without the snippets: pretty sad. 
+  
+  Demonstrate lack of snippets:
+  - disable highlights in chrome inspector
+  - tick 'show unmatched'
+  - untick 'show matched first'
   #+END_NOTES
 - [[https://docs.rs/tantivy/0.10.3/tantivy/struct.IndexWriter.html][transactional]] index updates
   #+BEGIN_NOTES
@@ -263,24 +267,30 @@ Features:
   I'm in progress of writing up a github issue, will put the link here.  
   #+END_NOTES
 - [[https://github.com/tantivy-search/tantivy-py][Python bindings]]
-- well documented, easy to modfy
-
-  TODO FIXME always display help in interface?
+- well documented, easy to modify
   
-** TODO implement facets quickly?                                  :noexport:
+  #+BEGIN_NOTES
+  Mention [[https://tantivy-search.github.io/tantivy/tantivy/schema/struct.Facet.html][facets]]? 
+  #+END_NOTES
+
+** TODO implement facets?                                          :noexport:
 
 ** Tantivy CLI: awesome
 Takes you from zero to prototype in a matter of minutes without distracting on irrelevant stuff.
 
-- TODO elaborate
-- CLI: simply awesome
+#+BEGIN_SRC bash
+  tantivy-cli new    -i your_index  # interactive!
+  tantivy-cli index  -i your_index < data.jsonl
+  tantivy-cli serve  -i your_index # http interface
+  tantivy-cli search -i your_index -q "spinach AND paneer" # cli queries
+#+END_SRC
+ 
+
   #+BEGIN_NOTES
   And I'm not exaggerating about minutes!
   
   I spent most time on scraping and frontend.
   #+END_NOTES
-
-** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noexport:
 
 * Tantivy: bad
 # TODO instead of 'bad': use smth different?  
@@ -295,24 +305,24 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   It's not too bad though, I'm getting around this by relying on line breaks to only display matched items.
   #+END_NOTES
 
-* Tantivy: enhancing
-- TODO demonstrate lack of snippets with a checkbox?
-- TODO explain how I added snippets, maybe with a bit of code? also explain issues with highlights?
-
-  
-* Rust observations
+* Enhancing Tantivy
+Rust observations:
 - single binary: very easy to deploy
  
-  ~cargo install tantivy-cli --root /Dropbox/soft/tantivy-cli~
+  #+BEGIN_SRC bash
+  cargo install tantivy-cli --root /Dropbox/soft/tantivy-cli
+  #+END_SRC
  
   #+BEGIN_NOTES
   Especially on VPS, which only (huh!) got two cores and wouldn't handle compiling Rust well
   #+END_NOTES
 - [[https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html][~musl~]]: minimal libc implementation
   
-  ~sudo apt install musl-tools && rustup target add x86_64-unknown-linux-musl~
-
-  ~cargo build/install --target x86_64-unknown-linux-musl~
+  #+BEGIN_SRC bash
+  apt install musl-tools 
+  rustup target add x86_64-unknown-linux-musl
+  cargo build/install --target x86_64-unknown-linux-musl
+  #+END_SRC
   
   #+BEGIN_NOTES
   Turned out my desktop and my VPS where I wanted to run the backend use different libc version.
@@ -322,9 +332,7 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   With Rust it turned out to be a matter of adding a target via rustup and that's it!
   #+END_NOTES
 
-- TODO write about [[https://doc.rust-lang.org/rust-by-example/trait/derive.html][derive]] debug/serialize
-  
-  TODO move this to enhancing tantivy??
+- [[https://doc.rust-lang.org/rust-by-example/trait/derive.html][derive]] debug/serialize
 
   #+BEGIN_NOTES
   First seen in Haskell!
@@ -336,8 +344,9 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   But it's a very reasonable default feature to have.
   #+END_NOTES
 
-** Enhancing Tantivy  
-- cargo: *very* easy to change dependency to local
+** 
+
+Cargo: *very* easy to change dependency to local
   #+BEGIN_SRC
   tantivy-cli/Cargo.toml:
   - tantivy = "0.10"
@@ -345,16 +354,12 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   #+END_SRC
   
   #+BEGIN_NOTES
-  E.g. as opposed to Python (messing with PYTHONPATH, pipenv?)
-  
-  TODO it's not the same verions of Tantivy that's in master and it's a great thing!
   I managed to run this with the minimal effort.
 
   There is tantivy, tantivy-cli and tantivy-py.
+  I was experimenting with exposing this snippet API from tantivy so needed to change dependency.
   
-  I was experimenting with exposing this snippet API from tantivy so needed to change dependency 
-  
-  To be fair, not too bad in pip
+  To be fair, not too bad in pip:
   
   ~pip3 install --user 'git+https://github.com/karlicoss/tantivy-py@delete-all-documents'~
   
@@ -362,7 +367,13 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
 
   #+END_NOTES
 
-  - or, github: ~cargo install --git https://github.com/karlicoss/tantivy-cli --branch serve-snippets~
+  - or, github: 
+
+    #+BEGIN_SRC bash
+    cargo install  \
+    --git https://github.com/karlicoss/tantivy-cli \
+    --branch serve-snippets
+    #+END_SRC
 
     #+BEGIN_NOTES
     I had to patch tantivy a bit, and it would take me a bit of time to get PRs accepted to upstream.
@@ -370,15 +381,21 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
     You can try it as easy as you would 
     #+END_NOTES
 
-- [[https://github.com/tantivy-search/tantivy-py][tantivy-py]]: surprisingly simple integration
+** 
+[[https://github.com/tantivy-search/tantivy-py][tantivy-py]]: surprisingly simple integration
   
-  - just ~pip install .~ thanks to TODO cargo-setuptools?
+  - just ~pip install~ thanks to [[https://github.com/PyO3/setuptools-rust][=setuptools-rust=]].
     #+BEGIN_NOTES
     Benefits from existing Rust ecosystem: e.g. can run ~cargo build~, etc. You just write normal Rust code.
     #+END_NOTES  
-  - TODO code snippet?
-   Powered by [[https://github.com/PyO3/pyo3#using-rust-from-python][PyO3]].
-  
+  - easy to interface
+    #+BEGIN_SRC rust
+    fn delete_all_documents(&mut self) -> PyResult<u64> {
+      self.inner_index_writer.delete_all_documents().map_err(to_pyerr)
+    }
+    #+END_SRC
+     
+    Powered by [[https://github.com/PyO3/pyo3#using-rust-from-python][PyO3]].
 
 * Contributions back  
 Pull requests in progress:
@@ -386,7 +403,7 @@ Pull requests in progress:
 - exposing absolute highlight positions
 
   #+BEGIN_NOTES
-  [[https://docs.rs/tantivy/0.10.2/tantivy/struct.Snippet.html#method.to_html][to_html]] isn't gonna work well, you'll want to restyle it.
+  [[https://docs.rs/tantivy/0.10.2/tantivy/struct.Snippet.html#method.to_html][~to_html~]] isn't gonna work well, you'll want to restyle it.
   #+END_NOTES  
 
 - React sandbox to interact with CLI backend
@@ -432,7 +449,7 @@ Questions?
 #+END_NOTES
 
 - [[https://github.com/karlicoss/scrapyroo][github.com/karlicoss/scrapyroo]]
-- TODO add link to blog entry with slides
+- [[https://beepb00p.xyz/scrapyroo.html][beepb00p.xyz/scrapyroo.html]]: presentation with speaker notes
   #+BEGIN_NOTES
   The presentation will be available as plain text (as well as my notes), so hopefully you won't miss anything.
   #+END_NOTES
@@ -448,7 +465,7 @@ Me:
 - 🐦 [[https://twitter.com/karlicoss][twitter.com/karlicoss]]
   
 * Appendix: Tantivy details
-- how are scores calculated?
+** how are scores calculated?
   
   See [[https://docs.rs/tantivy/0.10.3/tantivy/query/struct.Explanation.html][~Explanation~]]. Basically builds a computation tree for a given match.
   
@@ -456,11 +473,9 @@ Me:
 
   'pretty' json is a little rough at the moment.
   
-- how are snippets selected?
+** how are snippets selected?
 
-  See [[https://github.com/tantivy-search/tantivy/blob/42756c7474317c2b1aa0610278b54c0bb0c70fb9/src/snippet/mod.rs#L144][~search_fragment~]]
-  
-  Somewhat heuristic: 
+  Somewhat heuristic, see [[https://github.com/tantivy-search/tantivy/blob/42756c7474317c2b1aa0610278b54c0bb0c70fb9/src/snippet/mod.rs#L144][~search_fragment~]]
 
   #+BEGIN_QUOTE
   The returned list is non-empty and contain less than 12 possibly overlapping fragments.
@@ -471,14 +486,14 @@ Me:
 
 * Appendix: random Rust things
 
-- Unicode handling
+** Unicode handling
   
   didn't have time to figure it out, so I just stripped all non-ascii
-- [[https://github.com/serde-rs/serde][serde]] and ~#[derive(Serialize)]~
+** [[https://github.com/serde-rs/serde][serde]] and ~#[derive(Serialize)]~
   
   ran into [[https://serde.rs/remote-derive.html][orphan rule]]
 
-- binary size:
+** binary size:
 
   #+BEGIN_SRC
   /coding/tantivy-cli/target $ du -hd1
@@ -498,9 +513,6 @@ Me:
     +OPTIONS: reveal_single_file:t ?
 
 * TODO x                                                           :noexport:
-** ok, font sucks a bit?
-
-   
 ** TODO speaker notes
 *** Heading 1
      Some contents.
@@ -510,11 +522,6 @@ Me:
 
   To skip exporting speaker notes, please set variable `org-reveal-ignore-speaker-notes` to `t`.
 
-** DONE use local reveal copy http://jr0cket.co.uk/2017/03/org-mode-driven-presentations-with-org-reveal-spacemacs.html
-   CLOSED: [2019-11-18 Mon 19:18]
-   :LOGBOOK:
-   - State "DONE"       from "TODO"       [2019-11-18 Mon 19:18]
-   :END:
 ** TODO [2019-11-15 Fri 22:43] hmm nice could just publish my presentation with notes as a post?
 ** TODO [#D] very easy to use local dependency (just point to direcory) when I wanted to hack tantivy :rust:scrapyroo:
    :PROPERTIES:
@@ -616,3 +623,26 @@ Me:
 ** TODO ugh. it's unclear how to hide a subtree???
 
 * TODO Ispell                                                      :noexport:
+
+ 
+* older todos :noexport:
+** TODO [#A] chicken AND -"chicken wings"                         :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-16 Sat 17:56]
+   :END:
+** TODO [#A] chicken AND -wings                                   :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-16 Sat 18:01]
+   :END:
+** TODO [#A] good query: "salmon sushi" AND miso AND "ice cream"  :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-19 Tue 00:32]
+   :END:
+** TODO [#A] demo "chicken sashimi"                               :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-19 Tue 00:38]
+   :END:
+** TODO [#A] -"vegetable oil" is a good example?                  :scrapyroo:
+   :PROPERTIES:
+   :CREATED:  [2019-11-19 Tue 00:43]
+   :END:
