@@ -15,3 +15,17 @@
 }
 
 /* TODO ?? .reveal aside.notes */
+
+
+/* TODO ugh hacky */
+.reveal #slide-fin {
+    text-align: left;
+}
+.reveal #slide-fin h2 {
+    text-align: center;
+}
+
+.reveal #slide-fin p {
+    margin-top: 0.5em;
+    margin-bottom: 0.1em;
+}

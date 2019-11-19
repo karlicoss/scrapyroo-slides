@@ -130,20 +130,44 @@ Python ([[https://github.com/scrapy/scrapy][scrapy]]). Luckily, almost no need f
 [[file:pic/json.png]]
 
 #+BEGIN_NOTES
-Go to some restaurant, e.g.
+To try it for yourself, go to some restaurant, e.g.
 https://deliveroo.co.uk/menu/london/spitalfields/tokyo-sushi-finsbury-park
 open chrome inspector and type ~{"~ .  ~js-react-on-rails-context~ should be among the results.
 
 If there are any Deliveroo developers here, sorry for public dissection!
-
 #+END_NOTES
 
+** Scraping menus
+   
+#+BEGIN_SRC json
+  {
+    "urls": ["/menu/london/liverpool-street/pub-classics-from-greene-king-bishopsgate"],
+    "delivery_location": { "address": [ -0.0623, 51.123 ]},
+    "id": 189155,
+    "name": "Pub Classics from Greene King - Kings Arms",
+    "description": "Bringing the pub to your door",
+    "uname": "pub-classics-from-greene-king-bishopsgate",
+    "menu": {"items": [
+       {
+           "id": 31299189,
+           "name": "Chickpea, Red Pepper & Hoisin Burger (VE)",
+           "description": "Chickpea and mixed vegetable burger",
+           "price": "\u00a310.79"
+       },
+       {
+           "id": 31085809,
+           "name": "Fish & Chips with Wine for 2",
+           "description": "2 x cod with chips and a bottle of wine\r\n",
+           "price": "\u00a338.99"
+       }
+    ]}
+  }
+#+END_SRC
+
 #+BEGIN_NOTES
-TODO FIXME demonstrate bit of json that we get as input?
+We get something like that (I've filtered out irrelevant stuff) for each restaurant.
 
-Python is interactive and very suitable to mess with input json data. 
-
-It makes sense to keep it as json intermediately to checkpoint in case scraping/indexing fails.
+Scraped json data is kept separately to checkpoint in case scraping/indexing fails.
 #+END_NOTES
 
 ** Indexing menus & serving data
@@ -151,7 +175,7 @@ It makes sense to keep it as json intermediately to checkpoint in case scraping/
 [[https://github.com/tantivy-search/tantivy][Tantivy]]!   
 
 #+BEGIN_NOTES
-I'm going to be explaining why it works well in the presentation.
+I'm going to be explaining why it works well later in the presentation.
 #+END_NOTES
 
 ** Frontend
@@ -182,17 +206,17 @@ Features:
 
 #+END_NOTES
 ** TODOs :noreveal:
-*** TODO [#B] mm, too much data is transferred
- probably because of snippets
-
 *** TODO [#A] make sure it runs on my laptop!!! 
     SCHEDULED: <2019-11-16 Sat>
 
-*** TODO [#C] think which things should I demonstrate?
+*** STRT [#C] think which things should I demonstrate?
+    :LOGBOOK:
+    - State "STRT"       from "TODO"       [2019-11-19 Tue 07:20]
+    :END:
 
 * Why Tantivy?
 
-- initial [[https://lunrjs.com][lunrjs]] implementation was a bit slow on phone
+- initial [[https://lunrjs.com][lunrjs]] implementation was visibly laggy even on desktop
   #+BEGIN_NOTES
   Need to carry data inside the huge html -- not that great.
   
@@ -347,14 +371,20 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
   
 
 * Contributions back  
-Pull requests in progress!
-- exposing highlights via CLI
-- simple React sandbox to interact with CLI backend and make running even easier
-TODO demonstrate cli command?
+Pull requests in progress:
+
+- exposing absolute highlight positions
+
+  #+BEGIN_NOTES
+  [[https://docs.rs/tantivy/0.10.2/tantivy/struct.Snippet.html#method.to_html][to_html]] isn't gonna work well, you'll want to restyle it.
+  #+END_NOTES  
+
+- React sandbox to interact with CLI backend
+
+  #+BEGIN_NOTES
+  Most of my time was spent on getting around frontend quirks, so that would make prototyping even easier.
+  #+END_NOTES
   
-#+BEGIN_NOTES
-returning html isn't gonna work well, you'd want to restyle it
-#+END_NOTES  
 
 * Outtakes  
 - rust & tantivy
@@ -376,14 +406,25 @@ returning html isn't gonna work well, you'd want to restyle it
 * TODO Credits
   
 * Thanks!
+  :PROPERTIES:
+  :CUSTOM_ID: fin
+  :END:
   
+#+BEGIN_NOTES
 Questions?  
+#+END_NOTES
 
-  
-- [[https://github.com/karlicoss/scrapyroo][scrapyroo]] at Github
+- [[https://github.com/karlicoss/scrapyroo][github.com/karlicoss/scrapyroo]]
 - TODO add link to blog entry with slides
-- 🐦 [[https://twitter.com/karlicoss][twitter.com/karlicoss]]
+
+Tantivy: 
+- [[https://github.com/tantivy-search][github.com/tantivy-search]]
+- [[https://gitter.im/tantivy-search/tantivy][gitter.im/tantivy-search/tantivy]]
+- [[https://docs.rs/tantivy][docs.rs/tantivy]]
+ 
+Me:
 - 💻 [[https://github.com/karlicoss][github.com/karlicoss]]
+- 🐦 [[https://twitter.com/karlicoss][twitter.com/karlicoss]]
   
 * Appendix: Tantivy details
 - how are scores calculated?
@@ -425,6 +466,8 @@ Questions?
   1.5G	./release
   5.8G	.
   #+END_SRC
+  
+  Not very cloud sync-friendly! However happily accepts symlink as ~target~ directory, so not too bad.
 
 * TODO  reveal help :noexport:
 - https://github.com/yjwen/org-reveal
