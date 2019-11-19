@@ -249,6 +249,8 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
 ** TODO demonstrate how easy it is to index data and serve in CLI, in babel source block perhaps? :noreveal:
 
 * Tantivy: bad
+# TODO instead of 'bad': use smth different?  
+
 - no nested document support ([[https://github.com/tantivy-search/tantivy/issues/617][yet]])
    
   - would be nice to have queries like =starter:dumpling AND main:salad=
@@ -414,6 +416,15 @@ Questions?
   
   ran into [[https://serde.rs/remote-derive.html][orphan rule]]
 
+- binary size:
+
+  #+BEGIN_SRC
+  /coding/tantivy-cli/target $ du -hd1
+  2.2G	./x86_64-unknown-linux-musl
+  2.2G	./debug
+  1.5G	./release
+  5.8G	.
+  #+END_SRC
 
 * TODO  reveal help :noexport:
 - https://github.com/yjwen/org-reveal
