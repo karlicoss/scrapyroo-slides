@@ -21,7 +21,7 @@
 These are my slides + speaker notes from [[https://www.meetup.com/Rust-London-User-Group/events/266262531][November Rust London User Group meetup]]. 
 Huge thanks to [[https://twitter.com/ernestkissiedu][Ernest]] for organising!
 
-Presentation is done in org-reveal and source is available [[https://github.com/karlicoss/scrapyroo-slides][here]].
+Presentation is done in org-reveal and source is available [[https://github.com/karlicoss/scrapyroo-slides][here]]. *Grey areas are speaker notes*, rest are actual slides.
 #+END_NOTES
 
 #+BEGIN_NOTES
@@ -36,11 +36,11 @@ Virtually none apart from some Project Euler.
 
 #+BEGIN_NOTES
 This time I also got away with not writing much of new Rust code.
-Which is a good thing! Library I'm going to tell you about does deals with most of complicated and tendious stuff.
+Which is a good thing! Library I'm going to tell you about does deals with most of complicated and tedious stuff.
 
 But this is my first proper interaction with the Rust ecosystem.
 
-I am comfortable with many different other programming languages though and have been following Rust news, so havent struggled with the languages specifically.
+I am comfortable with many different other programming languages though and have been following Rust news, so haven't struggled with the languages specifically.
 #+END_NOTES
 
 
@@ -59,11 +59,25 @@ Brrr.. I'm lucky to live now.
 #+END_NOTES
 
 * The problem 
-No full-text menu search :(
+No search by menus, only restaurants/cuisines :(
 
 It's ok for getting *something* to eat, but not great when you know what you want to order.
 
-** You can't find specific food!
+#+BEGIN_NOTES
+UPDATE: Some spooky stuff happened 🎃
+On the morning of Tuesday, 19 November when I was to give this talk I found out that the search bar on Deliveroo has gone from "Restaurants or cuisines" to "Dishes, restaurants or cuisines"!
+
+Which meant  that Deliveroo supported searching in dish names.
+I thought I'd gone bonkers until few of my friends confirmed that they didn't remember that and it must have been added very recently, over the weekend.
+
+I like to think that I'm very important and that wasn't a coincidence so maybe I have some sort of superpower.
+If you miss a feature in some web service you're using, let me know, maybe I can implement it and that would get the service to implement it too :P (could start with editing tweets, perhaps?)
+
+So, you can search in dishes too now, however hopefully that doesn't make my tool irrelevant, you'd be able to see for yourself later.
+(e.g. full text menu search, not just titles, search as you type, queries)
+#+END_NOTES
+
+** You can't find specific dishes!
 
 - craving things
 - varying your diet
@@ -106,9 +120,9 @@ This is the best you're gonna get from Deliveroo.
 Full text search is a basic human right!     
 
 #+BEGIN_NOTES
-I asked people and that's apparently what they accept and never even questioned!  
+I asked people and apparently they just accepted and never questioned that sad workflow!  
 
-It feels especially wrong to me because human brains are good at creativity.
+It feels especially wrong to me because human brains are good at creative things.
 Not so good at stuff like text search -- that's one of things computers are *exceptionally* good at and we're ought to exploit that.
 #+END_NOTES  
 
@@ -191,6 +205,9 @@ I'm going to be explaining why it works well later in the presentation.
 HTML and some Javascript/React
 
 * Scrapyroo
+  :PROPERTIES:
+  :CUSTOM_ID: scrapyroo
+  :END:
   
 (Live demo). You can try it here: [[https://scrapyroo.karlicoss.xyz][scrapyroo.karlicoss.xyz]]
 
@@ -208,9 +225,9 @@ Also there is a screenshot in [[https://github.com/karlicoss/scrapyroo][readme]]
   demo: say you want some halloumi and green vegetables.
   
   Type: 'halloumi AND vegetables'. Whoa, vegetable smoothie in results? No, thank you.
-  So we can use phrase query (quotes) and exlusive query (-): add 'AND -"vegetable smoothie"'. Ah, that's better now!
+  So we can use phrase query (quotes) and exclusive query (-): add 'AND -"vegetable smoothie"'. Ah, that's better now!
   
-  Say you also want some desert. add 'AND cheesecake' or 'AND "ice cream"'. Nice, few places acrually serve this combination!
+  Say you also want some desert. add 'AND cheesecake' or 'AND "ice cream"'. Nice, few places actually serve this combination!
   #+END_NOTES
   
   #+BEGIN_NOTES
@@ -299,6 +316,7 @@ Takes you from zero to prototype in a matter of *minutes* without distracting on
   tantivy-cli index  -i your_index < data.jsonl
   tantivy-cli serve  -i your_index # http interface
   tantivy-cli search -i your_index -q "spinach AND paneer" # cli queries
+  tantivy-cli bench  # query benchmarking
 #+END_SRC
  
 
@@ -453,12 +471,14 @@ Pull requests in progress:
 
 * Credits
   
-- [[https://github.com/petr-tik][github.com/petr-tik]]
-#+BEGIN_NOTES
-Petr pushed me to actually give a talk, helped with Tantivy and gave me lots of helpful advice on improving the presentation. Thank you!
+- [[https://github.com/petr-tik][github.com/petr-tik]]: ask him about Tantivy!
+  #+BEGIN_NOTES
+  Petr pushed me to actually give a talk, helped with Tantivy and gave me lots of helpful advice on improving the presentation. Thank you!
+  
+  He's passionate about Tantivy and will be happy to help you if you think something is missing or can be improved.
+  #+END_NOTES
 
-He's passionate about Tantivy and will be happy to help you if you think something is missing or can be improved.
-#+END_NOTES
+- [[https://twitter.com/katya_titkova][Katya]]: beta testing and ghostwriting
 
 * Thanks!
   :PROPERTIES:
