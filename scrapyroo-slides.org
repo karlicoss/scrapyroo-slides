@@ -15,7 +15,7 @@
 #+REVEAL_HEAD_PREAMBLE: <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 # #+OPTIONS: reveal_single_file:t
 
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:1
 
 #+BEGIN_NOTES
 These are my slides + speaker notes from [[https://www.meetup.com/Rust-London-User-Group/events/266262531][November Rust London User Group meetup]]. 
@@ -26,6 +26,8 @@ Presentation is done in org-reveal and source is available [[https://github.com/
 
 #+BEGIN_NOTES
 Hi, I'm Dima and today I'm gonna tell you about [[https://github.com/karlicoss/scrapyroo][Scrapyroo]], which is a tool I built to search over Deliveroo menus and make my life a bit easier.
+
+The tool was made possible by [[https://github.com/tantivy-search/tantivy][Tantivy]], [[https://github.com/scrapy/scrapy][scrapy]] and [[https://reactjs.org][React]] 
 
 Also just to make clear: I'm not employed by Deliveroo!
 So it's not like I'm just pitching you the feature I implemented on my day job :P
@@ -204,7 +206,8 @@ I'm going to be explaining why it works well later in the presentation.
 ** Frontend
 HTML and some Javascript/React
 
-* Scrapyroo
+
+* @@html:Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font>@@
   :PROPERTIES:
   :CUSTOM_ID: scrapyroo
   :END:
