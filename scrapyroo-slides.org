@@ -3,6 +3,7 @@
 #+EMAIL: karlicoss@gmail.com
 # #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_ROOT: ./reveal.js-3.8.0
+# #+REVEAL_ROOT: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/
 #+REVEAL_EXTRA_CSS: ./style-reveal.css
 #+HTML_HEAD_EXTRA: <style>.NOTES {background-color: lightgray;}</style>
 # #+REVEAL_TRANS: linear
@@ -12,6 +13,7 @@
 #+REVEAL_HEAD_PREAMBLE: <script src='hack-footer.js'></script>
 # TODO wtf it looks a bit blurry in Firefox.. don't think font is the issue
 #+REVEAL_HEAD_PREAMBLE: <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+# #+OPTIONS: reveal_single_file:t
 
 #+OPTIONS: toc:nil
 
@@ -449,7 +451,7 @@ Questions?
 #+END_NOTES
 
 - [[https://github.com/karlicoss/scrapyroo][github.com/karlicoss/scrapyroo]]
-- [[https://beepb00p.xyz/scrapyroo.html][beepb00p.xyz/scrapyroo.html]]: presentation with speaker notes
+- [[https://beepb00p.xyz/scrapyroo.html][beepb00p.xyz/scrapyroo.html]]: speaker notes!
   #+BEGIN_NOTES
   The presentation will be available as plain text (as well as my notes), so hopefully you won't miss anything.
   #+END_NOTES
