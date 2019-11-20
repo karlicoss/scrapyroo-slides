@@ -18,7 +18,14 @@
 #+OPTIONS: toc:nil
 
 #+BEGIN_NOTES
-Hi, I'm Dima and today I'm gonna tell you about Scrapyroo, which is a tool I implemented to search over Deliveroo menus and make my life a bit easier.
+These are my slides + speaker notes from [[https://www.meetup.com/Rust-London-User-Group/events/266262531][November Rust London User Group meetup]]. 
+Huge thanks to [[https://twitter.com/ernestkissiedu][Ernest]] for organising!
+
+Presentation is done in org-reveal and source is available [[https://github.com/karlicoss/scrapyroo-slides][here]].
+#+END_NOTES
+
+#+BEGIN_NOTES
+Hi, I'm Dima and today I'm gonna tell you about [[https://github.com/karlicoss/scrapyroo][Scrapyroo]], which is a tool I built to search over Deliveroo menus and make my life a bit easier.
 
 Also just to make clear: I'm not employed by Deliveroo!
 So it's not like I'm just pitching you the feature I implemented on my day job :P
@@ -28,11 +35,12 @@ So it's not like I'm just pitching you the feature I implemented on my day job :
 Virtually none apart from some Project Euler.
 
 #+BEGIN_NOTES
-I wouldn't necessarily call it a project as I got away with not writing much of new Rust code.
-(which is a good thing! Library I'm going to tell you about does deals with most of hard boring stuff)
-But certainly this is my first proper interaction with the Rust ecosystem.
+This time I also got away with not writing much of new Rust code.
+Which is a good thing! Library I'm going to tell you about does deals with most of complicated and tendious stuff.
 
-I am comfortable with many different other programming languages though and have been following Rust news.
+But this is my first proper interaction with the Rust ecosystem.
+
+I am comfortable with many different other programming languages though and have been following Rust news, so havent struggled with the languages specifically.
 #+END_NOTES
 
 
@@ -50,7 +58,7 @@ My older friends told me some dreadful stories. Apparently you'd browse through 
 Brrr.. I'm lucky to live now.
 #+END_NOTES
 
-* The problem   
+* The problem 
 No full-text menu search :(
 
 It's ok for getting *something* to eat, but not great when you know what you want to order.
@@ -62,11 +70,11 @@ It's ok for getting *something* to eat, but not great when you know what you wan
 - accommodating multiple people's prefs at the same time
    
 #+BEGIN_NOTES
-Craving: e.g. if you want to treat yourself with some dessert, better get something you'd *really* enjoy instead of mediocre one because that's what the restaurant offered.
+Why would you want this?
 
-Varying: I'm trying to expose myself to all kinds of food to make sure I'm not missing on some important nutrients.
-
-Multiple people: you and your friends want different things and you need to choose a single restaurant to order from.
+- Craving: e.g. if you want to treat yourself with some dessert, better get something you'd *really* enjoy instead of mediocre one because that's what the restaurant offered.
+- Varying: I'm trying to expose myself to all kinds of food to make sure I'm not missing on some important nutrients.
+- Multiple people: you and your friends want different things and you need to choose a single restaurant to order from.
 #+END_NOTES
 
 ** 
@@ -113,7 +121,7 @@ Not so good at stuff like text search -- that's one of things computers are *exc
   
   About 600 restaurants deliver to my postcode.
   
-  50Mb json file (although lots of it are not so useful?)
+  Results in huge json file.
   #+END_NOTES
 - index menu data
   #+BEGIN_NOTES
@@ -135,7 +143,7 @@ To try it for yourself, go to some restaurant, e.g.
 https://deliveroo.co.uk/menu/london/spitalfields/tokyo-sushi-finsbury-park
 open chrome inspector and type ~{"~ .  ~js-react-on-rails-context~ should be among the results.
 
-If there are any Deliveroo developers here, sorry for public dissection!
+If there are any Deliveroo developers here, sorry for public dissection of your website!
 #+END_NOTES
 
 ** Scraping menus
@@ -184,9 +192,14 @@ HTML and some Javascript/React
 
 * Scrapyroo
   
-(Live demo)
-# TODO put a link here?
-# TODO put a backup link to my online instance
+(Live demo). You can try it here: [[https://scrapyroo.karlicoss.xyz][scrapyroo.karlicoss.xyz]]
+
+#+BEGIN_NOTES
+Note that this only indexes my district (Whitechapel).
+Also not sure for how long I'll expose it, but I'll make a demo video before shutting it down.
+
+Also there is a screenshot in [[https://github.com/karlicoss/scrapyroo][readme]].
+#+END_NOTES
 
 ** Features
    
@@ -194,10 +207,10 @@ HTML and some Javascript/React
   #+BEGIN_NOTES
   demo: say you want some halloumi and green vegetables.
   
-  Type: 'halloumi AND vegetables'. Whoa, vegetable smoothie? No, thank you.
-  So we can add 'AND -"vegetable smoothie"'. Ah, that's better now!
+  Type: 'halloumi AND vegetables'. Whoa, vegetable smoothie in results? No, thank you.
+  So we can use phrase query (quotes) and exlusive query (-): add 'AND -"vegetable smoothie"'. Ah, that's better now!
   
-  Say you want some desert. 'AND cheesecake' or 'AND "ice cream"'. Nice, few places serve this!
+  Say you also want some desert. add 'AND cheesecake' or 'AND "ice cream"'. Nice, few places acrually serve this combination!
   #+END_NOTES
   
   #+BEGIN_NOTES
@@ -211,14 +224,15 @@ HTML and some Javascript/React
   #+END_NOTES
 - search as you type
   #+BEGIN_NOTES
-  At the moment requests index on almost every keystroke, wonder if we could benefit somehow?
+  At the moment requests index on almost every keystroke, would be nice to keep a persistent connection,
+  although that's something that is hard to implement in a generic way.
   
   Demonstrate in dev tools
   #+END_NOTES
 - works from phone as well as desktop browser
 
 #+BEGIN_NOTES
-- debug? maybe later if I got a bit more time
+- show debug mode? maybe later if I got a bit more time
 - ui perhaps is a bit rough
 #+END_NOTES
 
@@ -232,7 +246,7 @@ HTML and some Javascript/React
   #+BEGIN_NOTES
   Need to carry data inside the huge html -- not that great.
   
-  You need Internet anyway to make an order, so I didn't mind having a proper backend.
+  You need internet anyway to make an order, so I didn't mind having a proper backend.
   #+END_NOTES
 
 - also, why not?
@@ -278,7 +292,7 @@ Features:
 ** TODO implement facets?                                          :noexport:
 
 ** Tantivy CLI: awesome
-Takes you from zero to prototype in a matter of minutes without distracting on irrelevant stuff.
+Takes you from zero to prototype in a matter of *minutes* without distracting on irrelevant stuff.
 
 #+BEGIN_SRC bash
   tantivy-cli new    -i your_index  # interactive!
@@ -290,6 +304,7 @@ Takes you from zero to prototype in a matter of minutes without distracting on i
 
   #+BEGIN_NOTES
   And I'm not exaggerating about minutes!
+  You can index data and expose it to your frontend without a singe line of code.
   
   I spent most time on scraping and frontend.
   #+END_NOTES
@@ -400,6 +415,10 @@ Cargo: *very* easy to change dependency to local
     Powered by [[https://github.com/PyO3/pyo3#using-rust-from-python][PyO3]].
 
 * Contributions back  
+#+BEGIN_NOTES
+I figured Tantivy could benefit from some things I implemented.
+#+END_NOTES
+
 Pull requests in progress:
 
 - exposing absolute highlight positions
@@ -408,7 +427,7 @@ Pull requests in progress:
   [[https://docs.rs/tantivy/0.10.2/tantivy/struct.Snippet.html#method.to_html][~to_html~]] isn't gonna work well, you'll want to restyle it.
   #+END_NOTES  
 
-- React sandbox to interact with CLI backend
+- React boilerplate to interact with CLI backend
 
   #+BEGIN_NOTES
   Most of my time was spent on getting around frontend quirks, so that would make prototyping even easier.
