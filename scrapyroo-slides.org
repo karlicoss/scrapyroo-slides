@@ -230,17 +230,17 @@ Also there is a screenshot in [[https://github.com/karlicoss/scrapyroo][readme]]
   Type: 'halloumi AND vegetables'. Whoa, vegetable smoothie in results? No, thank you.
   So we can use phrase query (quotes) and exclusive query (-): add 'AND -"vegetable smoothie"'. Ah, that's better now!
   
-  Say you also want some desert. add 'AND cheesecake' or 'AND "ice cream"'. Nice, few places actually serve this combination!
+  Say you also want some desert. Add 'AND cheesecake' or 'AND "ice cream"'. Nice, few places actually serve this combination!
   #+END_NOTES
   
   #+BEGIN_NOTES
   Or you're ordering with two other friends. 
 
-  One you want prawns, another one chicken salad, and the third wants some feta.
+  You want prawns, another one wants chicken salad, and the third wants some feta.
   
   'prawns AND "chicken salad" AND "feta"' -- and we instantly find few matches!
   
-  Without full text search there is no way you would ever find it.
+  Without full text search there is no way you would ever find it, and someone would be unsatisfied about collective choice.
   #+END_NOTES
 - search as you type
   #+BEGIN_NOTES
@@ -331,6 +331,9 @@ Takes you from zero to prototype in a matter of *minutes* without distracting on
   #+END_NOTES
 
 * Tantivy: bad
+  :PROPERTIES:
+  :CUSTOM_ID: tantivy_bad
+  :END:
 # TODO instead of 'bad': use smth different?  
 
 - no nested document support ([[https://github.com/tantivy-search/tantivy/issues/617][yet]])
