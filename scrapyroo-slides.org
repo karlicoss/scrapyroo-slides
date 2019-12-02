@@ -5,7 +5,6 @@
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 # #+REVEAL_ROOT: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/
 #+REVEAL_EXTRA_CSS: ./style-reveal.css
-#+HTML_HEAD_EXTRA: <style>.NOTES {background-color: lightgray;}</style>
 # #+REVEAL_TRANS: linear
 #+REVEAL_SLIDE_FOOTER:  <div class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></div>
 #+REVEAL_TITLE_SLIDE:    <h1 class='title'>Scrapy<font color='#b7410e'>r</font><font color='#00ccbc'>oo</font></h1>
@@ -15,7 +14,10 @@
 #+REVEAL_HEAD_PREAMBLE: <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 # #+OPTIONS: reveal_single_file:t
 
+# TODO hmm how to make toc:0 if it's org-reveal mode?
 #+OPTIONS: toc:1
+
+#+HTML: <style>.NOTES {background-color: lightgray;}</style>
 
 #+BEGIN_NOTES
 These are my slides + speaker notes from [[https://www.meetup.com/Rust-London-User-Group/events/266262531][November Rust London User Group meetup]]. 
